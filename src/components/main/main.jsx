@@ -5,11 +5,13 @@ import LacationList from "../lacation-list/lacation-list";
 import Offers from "../offers/offers";
 import CityMap from "../city-map/city-map";
 import {useSelector} from "react-redux";
-import {getLocations} from "../../reducer/offersReducer/selectors";
+import {getLocations, getHotels} from "../../reducer/offersReducer/selectors";
 
 const Main = () => {
   const locations = useSelector(getLocations)
   const [activeLocation, setActiveLocation] = useState(locations[0])
+  const hotels = useSelector(getHotels)
+  const hotelsByActiveLocation = hotels.filter((hotel) => hotel.city.name === activeLocation)
 
   return (
     <div className="page page--gray page--main">
@@ -23,7 +25,7 @@ const Main = () => {
         />
         <div className="cities">
           <div className="cities__places-container container">
-          <Offers  activeLocation={activeLocation} />
+          <Offers  hotelsByActiveLocation={hotelsByActiveLocation} />
             <div className="cities__right-section">
               <CityMap />
             </div>
