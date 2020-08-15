@@ -1,13 +1,11 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 
-const PlaceCard= () => {
+const PlaceCard= ({hotel}) => {
   return (
     <article className="cities__place-card place-card">
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
-          <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image" />
+        <a href="/">
+          <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place" />
         </a>
       </div>
       <div className="place-card__info">
@@ -30,7 +28,7 @@ const PlaceCard= () => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">Wood and stone place</a>
+          <a href="/">Wood and stone place</a>
         </h2>
         <p className="place-card__type">Private room</p>
       </div>

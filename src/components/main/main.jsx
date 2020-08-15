@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import Header from "../header/header";
 import LacationList from "../lacation-list/lacation-list";
-import CitiesPlaces from "../cities-places/cities-places";
+import Offers from "../offers/offers";
 import CityMap from "../city-map/city-map";
 import {useSelector} from "react-redux";
 import {getLocations} from "../../reducer/offersReducer/selectors";
@@ -14,7 +14,6 @@ const Main = () => {
   return (
     <div className="page page--gray page--main">
       <Header />
-
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <LacationList
@@ -24,7 +23,7 @@ const Main = () => {
         />
         <div className="cities">
           <div className="cities__places-container container">
-          <CitiesPlaces />
+          <Offers  activeLocation={activeLocation} />
             <div className="cities__right-section">
               <CityMap />
             </div>
