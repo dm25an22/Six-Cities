@@ -1,4 +1,5 @@
 import {extend} from "../../utils";
+import { getAdaptedHotel } from "../../adapter";
 
 const initialState = {
   hotels: [],
@@ -22,7 +23,8 @@ const Operation = {
     return async (dispatch) => {
       const response = await fetch(`https://4.react.pages.academy/six-cities/hotels`);
       const hotels = await response.json();
-      dispatch(ActionCreator.loadHotels(hotels))
+      const adaptedHotels = hotels.map((hotel) => getAdaptedHotel(hotel))
+      dispatch(ActionCreator.loadHotels(adaptedHotels))
     } 
   }     
 };
