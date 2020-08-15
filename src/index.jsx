@@ -15,11 +15,14 @@ const store = createStore(
     )
   );
 
-store.dispatch(HotelsOperation.loadHotels());
+  Promise.all([
+    store.dispatch(HotelsOperation.loadHotels())
+  ]).then(() => {
+    ReacrDom.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.querySelector(`#root`)
+    );
+  })
 
-ReacrDom.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.querySelector(`#root`)
-);

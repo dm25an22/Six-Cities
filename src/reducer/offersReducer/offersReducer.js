@@ -1,3 +1,5 @@
+import {extend} from "../../utils";
+
 const initialState = {
   hotels: [],
 };
@@ -7,7 +9,7 @@ const ActionType = {
 };
 
 const ActionCreator = {
-  loadHotels: (hotels) => {
+  loadHotels(hotels) {
     return {
       type: ActionType.LOAD_HOTELS,
       payload: hotels
@@ -19,8 +21,8 @@ const Operation = {
   loadHotels: () => {
     return async (dispatch) => {
       const response = await fetch(`https://4.react.pages.academy/six-cities/hotels`);
-      const json = await response.json();
-      dispatch(ActionCreator.loadHotels(json))
+      const hotels = await response.json();
+      dispatch(ActionCreator.loadHotels(hotels))
     } 
   }     
 };
@@ -28,12 +30,12 @@ const Operation = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.LOAD_HOTELS:
-      return Object.assign({}, state, {
+      return extend(state, {
         hotels: action.payload
-      })
+      });
 
     default:
-      return state
+      return state;
   }
 };
 
