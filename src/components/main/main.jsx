@@ -2,12 +2,12 @@
 import React, {useState} from "react";
 import Header from "../header/header";
 import LacationList from "../lacation-list/lacation-list";
-import Offers from "../offers/offers";
-import CityMap from "../city-map/city-map";
 import {useSelector} from "react-redux";
 import {getLocations, getHotels} from "../../reducer/offersReducer/selectors";
 import {getSortedHotels} from "../../utils";
 import {TypeSort} from "../../enums";
+import CitiesContainer from "../cities-container/cities-container";
+import NoPlacesAvailable from "../no-places-available/no-places-available";
 
 const Main = () => {
   const locations = useSelector(getLocations);
@@ -28,19 +28,17 @@ const Main = () => {
           activeLocation={activeLocation}
           setActiveLocation={setActiveLocation}
         />
-        <div className="cities">
-          <div className="cities__places-container container">
-            <Offers 
-              activeLocation={activeLocation} 
-              hotelsByActiveSort={hotelsByActiveSort} 
-              activeSortType={activeSortType} 
-              setActiveSortType={setActiveSortType}
-            />
-            <div className="cities__right-section">
-              <CityMap />
-            </div>
-          </div>
-        </div>
+        {hotelsByActiveLocation.length 
+          ?
+        <CitiesContainer
+          activeLocation={activeLocation} 
+          hotelsByActiveSort={hotelsByActiveSort} 
+          activeSortType={activeSortType} 
+          setActiveSortType={setActiveSortType}
+         />
+          :
+         <NoPlacesAvailable activeLocation={activeLocation} />
+        }
       </main>
     </div>
   );
