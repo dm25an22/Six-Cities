@@ -1,3 +1,5 @@
+import {TypeSort} from "./enums";
+
 const extend = (a, b) => {
   return Object.assign({}, a, b);
 }
@@ -8,9 +10,29 @@ const getRatingByPercent = (rating) => {
   return (ratingRound * 100) / maxRating
 }
 
-console.log(getRatingByPercent(2.5));
+const getSortedHotels = (hotels, sortType) => {
+  const hotelsCopy = [...hotels];
+
+  switch (sortType) {
+    case TypeSort.POPULAR:
+      return hotelsCopy;
+
+    case TypeSort.TO_LOW:
+      return hotelsCopy.sort((a, b) => b.price - a.price);
+    
+    case TypeSort.TO_HIGH:
+      return hotelsCopy.sort((a, b) => a.price - b.price);
+    
+    case TypeSort.TOP_RATED:
+      return hotelsCopy.sort((a, b) => b.rating - a.rating);  
+    
+    default:
+      return hotelsCopy;
+  }
+}
 
 export {
   extend,
-  getRatingByPercent
+  getRatingByPercent,
+  getSortedHotels
 }
