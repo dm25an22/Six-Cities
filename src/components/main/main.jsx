@@ -1,13 +1,12 @@
-
 import React, {useState} from "react";
 import Header from "../header/header";
-import LacationList from "../lacation-list/lacation-list";
 import {useSelector} from "react-redux";
 import {getLocations, getHotels} from "../../reducer/offersReducer/selectors";
 import {getSortedHotels} from "../../utils";
 import {TypeSort} from "../../enums";
-import CitiesContainer from "../cities-container/cities-container";
+import PageMain from "../page-main/page-main";
 import NoPlacesAvailable from "../no-places-available/no-places-available";
+import {ContextMain} from "../../context";
 
 const Main = () => {
   const locations = useSelector(getLocations);
@@ -15,32 +14,32 @@ const Main = () => {
   const [activeLocation, setActiveLocation] = useState(locations[0]);
   const [activeSortType, setActiveSortType] = useState(TypeSort.POPULAR);
 
-  const hotelsByActiveLocation = hotels.filter((hotel) => hotel.city.name === activeLocation);
+  let hotelsByActiveLocation = hotels.filter((hotel) => hotel.city.name === activeLocation);
   const hotelsByActiveSort = getSortedHotels(hotelsByActiveLocation, activeSortType)
 
+  if (activeLocation === `Cologne`) {
+    hotelsByActiveLocation = []
+  } // Времмено для тестов
+ 
   return (
-    <div className="page page--gray page--main">
-      <Header />
-      <main className="page__main page__main--index">
-        <h1 className="visually-hidden">Cities</h1>
-        <LacationList
-          locations={locations}
-          activeLocation={activeLocation}
-          setActiveLocation={setActiveLocation}
-        />
+    <ContextMain.Provider value={{
+      locations,
+      activeLocation,
+      setActiveLocation,
+      activeSortType,
+      setActiveSortType,
+      hotelsByActiveSort
+    }}>
+      <div className="page page--gray page--main">
+        <Header />
         {hotelsByActiveLocation.length 
           ?
-        <CitiesContainer
-          activeLocation={activeLocation} 
-          hotelsByActiveSort={hotelsByActiveSort} 
-          activeSortType={activeSortType} 
-          setActiveSortType={setActiveSortType}
-         />
-          :
-         <NoPlacesAvailable activeLocation={activeLocation} />
+        <PageMain />
+        :
+        <NoPlacesAvailable />
         }
-      </main>
-    </div>
+      </div>
+    </ContextMain.Provider>
   );
 }
 

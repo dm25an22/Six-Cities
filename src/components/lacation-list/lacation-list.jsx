@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import LocationItem from "../location-item/location-item";
+import {ContextMain} from "../../context";
 
-const LacationList = ({locations, activeLocation, setActiveLocation}) => {
+const LacationList = () => {
+  const {locations, activeLocation, setActiveLocation} = useContext(ContextMain);
+
   return (
     <div className="tabs">
       <section className="locations container">

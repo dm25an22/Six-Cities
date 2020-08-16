@@ -1,9 +1,11 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useContext} from "react";
 import {TypeSort} from "../../enums";
+import {ContextMain} from "../../context";
 
-const PlacesSorting = ({setActiveSortType, activeSortType}) => {
+const PlacesSorting = () => {
+  const {setActiveSortType, activeSortType} = useContext(ContextMain);
+
   useEffect(() => {
-    console.log(`ok`)
     setActiveSortType(TypeSort.POPULAR)
   }, [setActiveSortType]);
 
