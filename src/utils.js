@@ -2,13 +2,13 @@ import {TypeSort} from "./enums";
 
 const extend = (a, b) => {
   return Object.assign({}, a, b);
-}
+};
 
 const getRatingByPercent = (rating) => {
   const maxRating = 5
   const ratingRound = Math.round(rating)
   return (ratingRound * 100) / maxRating
-}
+};
 
 const getSortedHotels = (hotels, sortType) => {
   const hotelsCopy = [...hotels];
@@ -29,10 +29,20 @@ const getSortedHotels = (hotels, sortType) => {
     default:
       return hotelsCopy;
   }
+};
+
+const getHotelById = (hotels, id) => {
+  return hotels.find((hotel) => hotel.id === Number(id));
+}
+
+const getImgForRoomGallery = (images) => {
+  return images.slice(0, 6);
 }
 
 export {
   extend,
   getRatingByPercent,
-  getSortedHotels
+  getSortedHotels,
+  getHotelById,
+  getImgForRoomGallery
 }

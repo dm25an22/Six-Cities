@@ -5,6 +5,12 @@ const TypeSort = {
   TOP_RATED: `top-rated`
 };
 
+const AppRoute = {
+  ROOT: `/`,
+  ROOM: `/room`
+}
+
 export {
-  TypeSort
+  TypeSort,
+  AppRoute
 }

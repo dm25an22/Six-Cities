@@ -16,7 +16,7 @@ const store = createStore(
   );
 
   Promise.all([
-    store.dispatch(HotelsOperation.loadHotels())
+    store.dispatch(HotelsOperation.loadHotels()),
   ]).then(() => {
     ReacrDom.render(
       <Provider store={store}>
