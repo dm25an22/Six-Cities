@@ -25,11 +25,27 @@ const getSortedReviews = createSelector(
     const sortedReviews = reviewsCopy.sort((a, b) => new Date(b.date) - new Date(a.date));
     return sortedReviews.slice(0, 10);
   }
-)
+);
+
+const getNearbyHotels = (state) => {
+  return state[NameSpace.OFFERS].nearbyHotels;
+}
+
+const getNearbyHotelsMax = createSelector(
+  getNearbyHotels,
+  (hotels) => {
+    if (!hotels) {
+      return [];
+    }
+
+    return hotels.slice(0, 3);
+  }
+);
 
 export {
   getHotels,
   getLocations,
   getReviews,
-  getSortedReviews
+  getSortedReviews,
+  getNearbyHotelsMax
 }

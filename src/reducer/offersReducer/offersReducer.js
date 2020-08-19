@@ -3,13 +3,16 @@ import { getAdaptedHotel, getAdaptedReview } from "../../adapter";
 
 const initialState = {
   hotels: [],
-  reviews: []
+  reviews: [],
+  nearbyHotels: []
 };
 
 const ActionType = {
   LOAD_HOTELS: `LOAD_HOTELS`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
-  CLEANUP_REVIEWS: `CLEANUP_REVIEWS`
+  LOAD_NEARBY_HOTELS: `LOAD_NEARBY_HOTELS`,
+  CLEANUP_REVIEWS: `CLEANUP_REVIEWS`,
+  CLEANUP_NEARBY_HOTELS: `CLEANUP_NEARBY_HOTELS`
 };
 
 const ActionCreator = {
@@ -32,6 +35,20 @@ const ActionCreator = {
       type: ActionType.CLEANUP_REVIEWS,
       payload: null
     }
+  },
+
+  loadNearbyHotels(nearbyHotels) {
+    return {
+      type: ActionType.LOAD_NEARBY_HOTELS,
+      payload: nearbyHotels
+    }
+  },
+
+  claenupNearbyHotels() {
+    return {
+      type: ActionType.CLEANUP_NEARBY_HOTELS,
+      payload: []
+    }
   }
 };
 
@@ -50,12 +67,26 @@ const Operation = {
       try {
         const response = await fetch(`https://4.react.pages.academy/six-cities/comments/${id}`);
         const reviews = await response.json();
-        const adapted = reviews.map(getAdaptedReview);
-        dispatch(ActionCreator.loadReviews(adapted))
+        const adaptedReviews = reviews.map(getAdaptedReview);
+        dispatch(ActionCreator.loadReviews(adaptedReviews))
         onSuccess();
       } catch {
         onError();
       }  
+    }
+  },
+
+  loadNearbyHotels: (id, onSuccess, onError) => {
+    return async (dispatch) => {
+      try {
+        const response = await fetch(`https://4.react.pages.academy/six-cities/hotels/${id}/nearby`);
+        const nearbyHotels = await response.json();
+        const adaptedNearbyHotels = nearbyHotels.map(getAdaptedHotel);
+        dispatch(ActionCreator.loadNearbyHotels(adaptedNearbyHotels))
+        onSuccess();
+      } catch {
+        onError();
+      }   
     }
   }
 };
@@ -75,6 +106,16 @@ const reducer = (state = initialState, action) => {
     case ActionType.CLEANUP_REVIEWS:
       return extend(state, {
         reviews: action.payload
+      });
+    
+    case ActionType.LOAD_NEARBY_HOTELS:
+      return extend(state, {
+        nearbyHotels: action.payload
+      });
+
+    case ActionType.CLEANUP_NEARBY_HOTELS:
+      return extend(state, {
+        nearbyHotels: action.payload
       });
 
     default:

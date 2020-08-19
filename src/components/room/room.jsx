@@ -13,12 +13,14 @@ import {ContextRoom} from "../../context";
 import withLoadStatus from "../../hocs/with-load-status/with-load-status";
 
 const RoomReviewWrapped = withLoadStatus(RoomReview);
+const RoomNearHotelsListWrapped = withLoadStatus(RoomNearHotelsList);
 
 const Room = () => {
-  const hotels = useSelector(getHotels)
+  window.scrollTo(0, 0)
+  const hotels = useSelector(getHotels);
   const match = useRouteMatch();
-  const hotel = getHotelById(hotels, match.params.id)
- 
+  const hotel = getHotelById(hotels, match.params.id);
+  
   return (
     <ContextRoom.Provider value={{hotel}}>
       <div className="page">
@@ -35,7 +37,7 @@ const Room = () => {
             <section className="property__map map" />
           </section>
           <div className="container">
-            <RoomNearHotelsList />
+            <RoomNearHotelsListWrapped />
           </div>
         </main>
       </div>
