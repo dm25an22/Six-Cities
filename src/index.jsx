@@ -6,7 +6,7 @@ import ReduxThunk from 'redux-thunk';
 import {composeWithDevTools} from "redux-devtools-extension";
 import App from "./app"
 import {rootReducer} from "./reducer/rootReducer"
-import {Operation as HotelsOperation} from "./reducer/offersReducer/offersReducer";
+import {Operation as OffersOperation} from "./reducer/offersReducer/offersReducer";
 
 const store = createStore(
   rootReducer,
@@ -16,7 +16,7 @@ const store = createStore(
   );
 
   Promise.all([
-    store.dispatch(HotelsOperation.loadHotels()),
+    store.dispatch(OffersOperation.loadHotels()),
   ]).then(() => {
     ReacrDom.render(
       <Provider store={store}>

@@ -8,7 +8,8 @@ const initialState = {
 
 const ActionType = {
   LOAD_HOTELS: `LOAD_HOTELS`,
-  LOAD_REVIEWS: `LOAD_REVIEWS`
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
+  CLEANUP_REVIEWS: `CLEANUP_REVIEWS`
 };
 
 const ActionCreator = {
@@ -24,6 +25,13 @@ const ActionCreator = {
       type: ActionType.LOAD_REVIEWS,
       payload: reviews
     }
+  },
+
+  cleanupReviews() {
+    return {
+      type: ActionType.CLEANUP_REVIEWS,
+      payload: null
+    }
   }
 };
 
@@ -37,12 +45,17 @@ const Operation = {
     } 
   },
   
-  loadReviews: (id) => {
+  loadReviews: (id, onSuccess, onError) => {
     return async (dispatch) => {
-      const response = await fetch(`https://4.react.pages.academy/six-cities/comments/${id}`);
-      const reviews = await response.json();
-      const adapted = reviews.map(getAdaptedReview);
-      dispatch(ActionCreator.loadReviews(adapted))
+      try {
+        const response = await fetch(`https://4.react.pages.academy/six-cities/comments/${id}`);
+        const reviews = await response.json();
+        const adapted = reviews.map(getAdaptedReview);
+        dispatch(ActionCreator.loadReviews(adapted))
+        onSuccess();
+      } catch {
+        onError();
+      }  
     }
   }
 };
@@ -55,6 +68,11 @@ const reducer = (state = initialState, action) => {
       });
     
     case ActionType.LOAD_REVIEWS:
+      return extend(state, {
+        reviews: action.payload
+      });
+    
+    case ActionType.CLEANUP_REVIEWS:
       return extend(state, {
         reviews: action.payload
       });

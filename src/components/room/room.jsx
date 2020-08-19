@@ -10,12 +10,15 @@ import {getHotelById} from "../../utils";
 import {useSelector} from "react-redux";
 import {getHotels} from "../../reducer/offersReducer/selectors";
 import {ContextRoom} from "../../context";
+import withLoadStatus from "../../hocs/with-load-status/with-load-status";
+
+const RoomReviewWrapped = withLoadStatus(RoomReview);
 
 const Room = () => {
   const hotels = useSelector(getHotels)
   const match = useRouteMatch();
   const hotel = getHotelById(hotels, match.params.id)
-  
+ 
   return (
     <ContextRoom.Provider value={{hotel}}>
       <div className="page">
@@ -26,7 +29,7 @@ const Room = () => {
             <div className="property__container container">
               <div className="property__wrapper">
                 <RoomInfo />
-                <RoomReview />
+                <RoomReviewWrapped />
               </div>
             </div>
             <section className="property__map map" />
