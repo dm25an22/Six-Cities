@@ -1,5 +1,7 @@
 import {createSelector} from "reselect";
 import {NameSpace} from "../name-space";
+import { getActiveLocation, getActiveSortType } from "../app-state/selector";
+import { getSortedHotels } from "../../utils";
 
 const getHotels = (state) => {
   return state[NameSpace.OFFERS].hotels;
@@ -42,10 +44,24 @@ const getNearbyHotelsMax = createSelector(
   }
 );
 
+const getHotelsByFilter = createSelector(
+  getHotels,
+  getActiveLocation,
+  (hotels, location) => hotels.filter((hotel) => hotel.city.name === location)
+);
+
+const getHotelsByActiveSortType = createSelector(
+  getHotelsByFilter,
+  getActiveSortType,
+  (hotels, sortType) => getSortedHotels(hotels, sortType)
+)
+
 export {
   getHotels,
   getLocations,
   getReviews,
   getSortedReviews,
-  getNearbyHotelsMax
+  getNearbyHotelsMax,
+  getHotelsByActiveSortType,
+  getHotelsByFilter
 }

@@ -1,6 +1,7 @@
 import React from "react";
 
 const LocationItem = ({city, isActive, setActiveLocation}) => {
+
   return (
     <li className="locations__item">
       <a 

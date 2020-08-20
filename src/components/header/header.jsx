@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AppRoute } from "../../enums";
+import { useSelector } from "react-redux";
+import { getUserData, getAuthStatus } from "../../reducer/userReducer/selector";
 
 const Header = () => {
+  const AuthStatus = useSelector(getAuthStatus);
+  const userData = useSelector(getUserData);
+
   return (
     <header className="header">
       <div className="container">
@@ -24,15 +29,20 @@ const Header = () => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <a
+                <Link 
+                  to={AppRoute.LOGIN}
                   className="header__nav-link header__nav-link--profile"
-                  href="/"
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+                  {AuthStatus 
+                    ?
                   <span className="header__user-name user__name">
-                    Oliver.conner@gmail.com
+                    {userData.email}
                   </span>
-                </a>
+                    :
+                    <span className="header__login">Sign in</span>
+                  }
+                </Link>
               </li>
             </ul>
           </nav>

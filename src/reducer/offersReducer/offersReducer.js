@@ -33,7 +33,7 @@ const ActionCreator = {
   cleanupReviews() {
     return {
       type: ActionType.CLEANUP_REVIEWS,
-      payload: null
+      payload: []
     }
   },
 

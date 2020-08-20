@@ -50,7 +50,18 @@ const getAdaptedReview = (data) => {
   }
 }
 
+const getAdaptedUserDate = (data) => {
+  return {
+    avatarUrl: data.avatar_url,
+    email: data.email,
+    id: data.id,
+    isPro: data.is_pro,
+    name: data.name
+  }
+}
+
 export {
   getAdaptedHotel,
-  getAdaptedReview
+  getAdaptedReview,
+  getAdaptedUserDate
 }

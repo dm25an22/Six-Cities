@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import LocationItem from "../location-item/location-item";
-import {ContextMain} from "../../context";
 
-const LacationList = () => {
-  const {locations, activeLocation, setActiveLocation} = useContext(ContextMain);
 
+const LacationList = ({activeLocation, locations, setActiveLocation}) => { 
   return (
     <div className="tabs">
       <section className="locations container">
@@ -12,10 +10,10 @@ const LacationList = () => {
           {locations.map((city) => {
             return (
               <LocationItem 
+                setActiveLocation={setActiveLocation}
                 key={city} 
                 city={city}
                 isActive={activeLocation === city}
-                setActiveLocation={setActiveLocation}
               />
             );
           })}

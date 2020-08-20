@@ -1,13 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import PlaceCard from "../place-card/place-card";
-import {ContextMain} from "../../context";
 
-const PlacesList = () => {
-  const {hotelsByActiveSort} = useContext(ContextMain);
-  
+const PlacesList = ({hotels}) => {
   return (
     <div className="cities__places-list places__list tabs__content">
-      {hotelsByActiveSort.map((hotel) => <PlaceCard key={hotel.id} hotel={hotel} /> )}
+      {hotels.map((hotel) => <PlaceCard key={hotel.id} hotel={hotel} /> )}
     </div>
   );
 }

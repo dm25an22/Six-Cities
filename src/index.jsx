@@ -1,28 +1,28 @@
 import React from "react";
 import ReacrDom from "react-dom";
-import {Provider} from "react-redux";
-import {createStore, applyMiddleware} from "redux"
-import ReduxThunk from 'redux-thunk'; 
-import {composeWithDevTools} from "redux-devtools-extension";
-import App from "./app"
-import {rootReducer} from "./reducer/rootReducer"
-import {Operation as OffersOperation} from "./reducer/offersReducer/offersReducer";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import ReduxThunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+import App from "./app";
+import { rootReducer } from "./reducer/rootReducer";
+import { Operation as OffersOperation } from "./reducer/offersReducer/offersReducer";
+import { Operation as UserOpertaion } from "./reducer/userReducer/userReducer";
 
 const store = createStore(
   rootReducer,
-  composeWithDevTools(
-    applyMiddleware(ReduxThunk),
-    )
-  );
+  composeWithDevTools(applyMiddleware(ReduxThunk))
+);
 
-  Promise.all([
-    store.dispatch(OffersOperation.loadHotels()),
-  ]).then(() => {
+new Promise((resolve) => {
+  resolve(store.dispatch(UserOpertaion.checkAuthStatus()));
+}).finally(() => {
+  Promise.all([store.dispatch(OffersOperation.loadHotels())]).then(() => {
     ReacrDom.render(
       <Provider store={store}>
         <App />
       </Provider>,
       document.querySelector(`#root`)
     );
-  })
-
+  });
+});

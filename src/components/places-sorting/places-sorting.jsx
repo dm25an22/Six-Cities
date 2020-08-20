@@ -1,13 +1,7 @@
-import React, {useEffect, useContext} from "react";
-import {TypeSort} from "../../enums";
-import {ContextMain} from "../../context";
+import React from "react";
 
-const PlacesSorting = () => {
-  const {setActiveSortType, activeSortType} = useContext(ContextMain);
-
-  useEffect(() => {
-    setActiveSortType(TypeSort.POPULAR)
-  }, [setActiveSortType]);
+const PlacesSorting = ({activeSortType, setActiveSortType}) => {
+  
 
   return (
     <form className="places__sorting" action="#" method="get">
