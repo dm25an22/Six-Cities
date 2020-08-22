@@ -18,8 +18,6 @@ const Main = () => {
     hotelsByLocation = [];
   }
 
-  console.log(`render`, activeLocation, hotelsByLocation);
-
   return (
     <div className="page page--gray page--main">
       <Header />
