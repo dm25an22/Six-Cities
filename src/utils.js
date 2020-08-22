@@ -53,6 +53,9 @@ const getHotelsByLocation = (hotels, location) => {
   return hotels.filter((hotel) => hotel.city.name === location)
 };
 
+const getUniqueLocations = (hotels) => {
+  return [...new Set(hotels.map((it) => it.city.name))].sort()
+};
 
 export {
   extend,
@@ -61,5 +64,6 @@ export {
   getHotelById,
   getImgForRoomGallery,
   getformatDateForReview,
-  getHotelsByLocation
+  getHotelsByLocation,
+  getUniqueLocations
 };

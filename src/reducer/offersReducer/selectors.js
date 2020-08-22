@@ -1,5 +1,6 @@
 import {createSelector} from "reselect";
 import {NameSpace} from "../name-space";
+import { getUniqueLocations } from "../../utils";
 
 const getHotels = (state) => {
   return state[NameSpace.OFFERS].hotels;
@@ -7,7 +8,7 @@ const getHotels = (state) => {
 
 const getLocations = createSelector(
   getHotels,
-  (hotels) => [...new Set(hotels.map((it) => it.city.name))].sort()
+  (hotels) => getUniqueLocations(hotels)
 );
 
 const getReviews = (state) => {

@@ -9,6 +9,7 @@ const PlaceCard = ({ hotel }) => {
   const history = useHistory();
   const authStatus = useSelector(getAuthStatus);
   const { price, rating, title, type, previewImage, isPremium, id } = hotel;
+  const ratingInPercent = getRatingByPercent(rating);
 
   return (
     <article
@@ -55,7 +56,7 @@ const PlaceCard = ({ hotel }) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${getRatingByPercent(rating)}%` }}></span>
+            <span style={{ width: `${ratingInPercent}%` }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

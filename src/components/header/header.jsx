@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { getUserData, getAuthStatus } from "../../reducer/userReducer/selector";
 
 const Header = () => {
-  const AuthStatus = useSelector(getAuthStatus);
+  const authStatus = useSelector(getAuthStatus);
   const userData = useSelector(getUserData);
 
   return (
@@ -29,12 +29,12 @@ const Header = () => {
           <nav className="header__nav">
             <ul className="header__nav-list">
               <li className="header__nav-item user">
-                <Link 
-                  to={AppRoute.LOGIN}
+                <Link
+                  to={`${authStatus ? AppRoute.FAVORITES : AppRoute.LOGIN}`}
                   className="header__nav-link header__nav-link--profile"
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                  {AuthStatus 
+                  {authStatus 
                     ?
                   <span className="header__user-name user__name">
                     {userData.email}
