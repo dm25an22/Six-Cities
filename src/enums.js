@@ -8,7 +8,8 @@ const TypeSort = {
 const AppRoute = {
   ROOT: `/`,
   ROOM: `/room`,
-  LOGIN: `/login`
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`
 }
 
 export {

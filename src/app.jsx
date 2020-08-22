@@ -4,6 +4,8 @@ import Main from "./components/main/main";
 import Room from "./components/room/room";
 import {AppRoute} from "./enums";
 import SignIn from "./components/sign-in/sign-in";
+import PrivateRoute from "./components/private-route";
+import Favorites from "./components/favorites";
 
 const App = () => {
   return (
@@ -11,6 +13,15 @@ const App = () => {
       <Switch>
           <Route exact path={AppRoute.ROOT} component={Main} />
           <Route exact path={AppRoute.LOGIN} component={SignIn} />
+          <PrivateRoute
+            exact
+            path={AppRoute.FAVORITES}
+            render={(props) => {
+              return (
+                <Favorites {...props} />
+              )
+            }}
+          />
         <Route exact path={`${AppRoute.ROOM}/:id`} component={Room} />
       </Switch>
     </BrowserRouter>
