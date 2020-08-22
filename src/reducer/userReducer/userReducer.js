@@ -20,13 +20,10 @@ const ActionCreator = {
     };
   },
 
-  login() {
+  login(userData) {
     return {
       type: ActionType.LOGIN,
-      payload: {
-        email: `max@email.com`,
-        password: `qwerr`,
-      },
+      payload: userData
     };
   },
 
@@ -41,7 +38,6 @@ const ActionCreator = {
 const Operation = {
   checkAuthStatus: () => {
     return async (dispatch) => {
-      try {
         const response = await fetch(
           `https://4.react.pages.academy/six-cities/login`,
           {
@@ -57,13 +53,10 @@ const Operation = {
 
         const authInfo = await response.json();
         dispatch(ActionCreator.setUserData(getAdaptedUserDate(authInfo)));
-      } catch {
-        console.log(`nok`);
-      }
     };
   },
 
-  login: () => {
+  login: (userData, onSuccess, onError) => {
     return async (dispatch) => {
       try {
         const response = await fetch(
@@ -73,19 +66,22 @@ const Operation = {
             headers: {
               "Content-Type": "application/json;charset=utf-8",
             },
-            body: JSON.stringify({
-              email: `max@email.com`,
-              password: `qwerr`,
-            }),
+            body: JSON.stringify(userData),
             credentials: "include",
           }
         );
+
+        if (!response.ok) {
+          throw new Error()
+        }
+
         const authInfo = await response.json();
         dispatch(ActionCreator.checkAuthStatus(true));
         dispatch(ActionCreator.setUserData(getAdaptedUserDate(authInfo)));
+        onSuccess();
       }
       catch {
-        console.log(`nok`);
+        onError();
       }
     };
   }

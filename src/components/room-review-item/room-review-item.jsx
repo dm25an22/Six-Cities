@@ -9,6 +9,8 @@ const RoomReviewItem = ({ review }) => {
     user: { name, avatarUrl },
   } = review;
 
+  const ratingByPercent = getRatingByPercent(rating);
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -26,7 +28,7 @@ const RoomReviewItem = ({ review }) => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{ width: `${getRatingByPercent(rating)}%` }} />
+            <span style={{ width: `${ratingByPercent}%` }} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
