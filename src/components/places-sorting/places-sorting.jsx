@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { TypeSort } from "../../enums";
 
 const PlacesSorting = ({activeSortType, setActiveSortType}) => {
   
+  useEffect(() => {
+    setActiveSortType(TypeSort.POPULAR);
+
+    return () => {
+      setActiveSortType(TypeSort.POPULAR);
+    }
+  }, [setActiveSortType])
 
   return (
     <form className="places__sorting" action="#" method="get">
-      <span className="places__sorting-caption">Sort by</span>
+      <span className="places__sorting-caption">Sort by </span>
       <span className="places__sorting-type" tabIndex="0">
         {activeSortType}
         <svg className="places__sorting-arrow" width="7" height="4">

@@ -1,6 +1,7 @@
 import React from "react";
 
-const LocationItem = ({city, isActive, setActiveLocation}) => {
+const LocationItem = ({city, setActiveLocation, isActive}) => {
+
 
   return (
     <li className="locations__item">
@@ -9,7 +10,7 @@ const LocationItem = ({city, isActive, setActiveLocation}) => {
         href="/"
         onClick={(evt) => {
           evt.preventDefault();
-          setActiveLocation(city)
+          setActiveLocation(city);
         }}
       >
         <span>{city}</span>

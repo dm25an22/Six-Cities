@@ -1,10 +1,7 @@
 import React from "react";
 import Header from "../header/header";
-import { useSelector } from "react-redux";
-import { getActiveLocation } from "../../reducer/app-state/selector";
 
 const SignIn = () => {
-  const activeLocation = useSelector(getActiveLocation);
 
   return (
       <div className="page page--gray page--login">
@@ -45,7 +42,7 @@ const SignIn = () => {
             <section className="locations locations--login locations--current">
               <div className="locations__item">
                 <a className="locations__item-link" href="#">
-                  <span>{activeLocation}</span>
+                  <span>Amsterdam</span>
                 </a>
               </div>
             </section>

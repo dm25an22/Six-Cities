@@ -1,14 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import LacationList from "../lacation-list/lacation-list";
-import {ContextMain} from "../../context";
 
-const NoPlacesAvailable = () => {
-  const {activeLocation} = useContext(ContextMain);
+const NoPlacesAvailable = ({activeLocation}) => {
 
   return (
-    <main className="page__main page__main--index page__main--index-empty">
-      <h1 className="visually-hidden">Cities</h1>
-      <LacationList />
+    // <main className="page__main page__main--index page__main--index-empty">
+    //   <h1 className="visually-hidden">Cities</h1>
+    //   <LacationList />
       <div className="cities">
         <div className="cities__places-container cities__places-container--empty container">
           <section className="cities__no-places">
@@ -20,7 +18,6 @@ const NoPlacesAvailable = () => {
           <div className="cities__right-section"></div>
         </div>
       </div>
-    </main>
   );
 }
 

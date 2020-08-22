@@ -49,6 +49,11 @@ const getformatDateForReview = (date) => {
   return `${month} ${year}`;
 };
 
+const getHotelsByLocation = (hotels, location) => {
+  return hotels.filter((hotel) => hotel.city.name === location)
+};
+
+
 export {
   extend,
   getRatingByPercent,
@@ -56,4 +61,5 @@ export {
   getHotelById,
   getImgForRoomGallery,
   getformatDateForReview,
+  getHotelsByLocation
 };
