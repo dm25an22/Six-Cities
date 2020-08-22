@@ -1,5 +1,6 @@
 import { extend } from "../../utils";
 import { getAdaptedUserDate } from "../../adapter";
+import {Operation as favoritesOperation} from "../favoritesReducer/favoritesReducer"
 
 const initialState = {
   authorizationStatus: false,
@@ -53,6 +54,7 @@ const Operation = {
 
         const authInfo = await response.json();
         dispatch(ActionCreator.setUserData(getAdaptedUserDate(authInfo)));
+        dispatch(favoritesOperation.loadFavorites())
     };
   },
 
@@ -78,6 +80,7 @@ const Operation = {
         const authInfo = await response.json();
         dispatch(ActionCreator.checkAuthStatus(true));
         dispatch(ActionCreator.setUserData(getAdaptedUserDate(authInfo)));
+        dispatch(favoritesOperation.loadFavorites())
         onSuccess();
       }
       catch {

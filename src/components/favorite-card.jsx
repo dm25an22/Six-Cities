@@ -8,6 +8,8 @@ const FavoriteCard = ({ hotel }) => {
   const { price, rating, title, type, previewImage, id } = hotel;
   const ratingInPercent = getRatingByPercent(rating);
 
+  console.log(previewImage);
+
   return (
     <article
       onClick={(evt) => {

@@ -1,23 +1,29 @@
 import React from "react";
-import { getRatingByPercent } from "../../utils";
+import { getRatingByPercent, checkInFavorites } from "../../utils";
 import { useHistory } from "react-router-dom";
 import { AppRoute } from "../../enums";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getAuthStatus } from "../../reducer/userReducer/selector";
+import { getFavorites } from "../../reducer/favoritesReducer/selector";
+import { Operation } from "../../reducer/favoritesReducer/favoritesReducer";
 
 const PlaceCard = ({ hotel }) => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const authStatus = useSelector(getAuthStatus);
+  const favorites = useSelector(getFavorites);
   const { price, rating, title, type, previewImage, isPremium, id } = hotel;
   const ratingInPercent = getRatingByPercent(rating);
+  const isFavorite = checkInFavorites(favorites, id);
+
+  const status = isFavorite ? 0 : 1;
+
+  console.log(isFavorite);
 
   return (
     <article
-      onClick={(evt) => {
-        evt.preventDefault();
-        history.push(`${AppRoute.ROOM}/${id}`);
-      }}
-      className="cities__place-card place-card"
+  
+    className="cities__place-card place-card"
     >
       {isPremium && (
         <div className="place-card__mark">
@@ -25,7 +31,14 @@ const PlaceCard = ({ hotel }) => {
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="/">
+        <a 
+          onClick={(evt) => {
+            evt.preventDefault();
+            history.push(`${AppRoute.ROOM}/${id}`);
+          }}
+          href="/"
+        >
+          
           <img
             className="place-card__image"
             src={previewImage}
@@ -44,7 +57,10 @@ const PlaceCard = ({ hotel }) => {
 
           {authStatus && (
             <button
-              className={`place-card__bookmark-button ${`place-card__bookmark-button--active`} button`}
+              onClick={() => {
+                dispatch(Operation.toggleIsFavorite(id, status));
+              }}
+              className={`place-card__bookmark-button ${isFavorite &&`place-card__bookmark-button--active`} button`}
               type="button"
             >
               <svg className="place-card__bookmark-icon" width="18" height="19">

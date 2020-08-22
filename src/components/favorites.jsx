@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "./header/header";
-import Footer from "../footer";
+import Footer from "./footer";
 import FavoritesList from "./favorites-list";
 import FavoritesEmpty from "./favorites-empty";
 import { useSelector } from "react-redux";
-import { getHotels } from "../reducer/offersReducer/selectors";
+import { getFavorites } from "../reducer/favoritesReducer/selector";
 
 const Favorite = () => {
-  const favoriteHotels = useSelector(getHotels);
+  const favoriteHotels = useSelector(getFavorites);
 
   return (
     <div className="page">

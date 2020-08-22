@@ -57,6 +57,16 @@ const getUniqueLocations = (hotels) => {
   return [...new Set(hotels.map((it) => it.city.name))].sort()
 };
 
+const removeHotelFromFavorites = (favorites, id) => {
+  const index = favorites.findIndex((it) => it.id === id);
+
+  return favorites.splice(index, 1);
+}
+
+const checkInFavorites = (favorites, id) => {
+  return Boolean(favorites.find((it) => it.id === id));
+}
+
 export {
   extend,
   getRatingByPercent,
@@ -65,5 +75,7 @@ export {
   getImgForRoomGallery,
   getformatDateForReview,
   getHotelsByLocation,
-  getUniqueLocations
+  getUniqueLocations,
+  removeHotelFromFavorites,
+  checkInFavorites
 };
