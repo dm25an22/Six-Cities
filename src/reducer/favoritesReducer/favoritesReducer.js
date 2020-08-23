@@ -1,4 +1,5 @@
 import { getAdaptedHotel } from "../../adapter";
+import { api } from "../../api";
 
 const { extend, removeHotelFromFavorites } = require("../../utils");
 
@@ -39,28 +40,17 @@ const ActionCreator = {
 const Operation = {
   loadFavorites: () => {
     return async (dispatch) => {
-      const response = await fetch(`https://4.react.pages.academy/six-cities/favorite`, {
-        credentials: "include",
-      });
-      const favorites = await response.json();
-      const adaptedFavorites = favorites.map((hotel) => getAdaptedHotel(hotel));
-
-      dispatch(ActionCreator.loadFavorites(adaptedFavorites));
+      const favorites = await api.getFavorites();
+      dispatch(ActionCreator.loadFavorites(favorites));
     }
   },
 
   toggleIsFavorite: (id, status) => {
     return async (dispatch) => {
-      const response = await fetch(`https://4.react.pages.academy/six-cities/favorite/${id}/${status}`, {
-        method: `POST`,
-        credentials: "include"
-      });
-
-      const hotel = await response.json();
-      const adaptedHotel = getAdaptedHotel(hotel);
+      const hotel = await api.toggleFavoriteStatus(id, status);
 
       if (status) {
-        dispatch(ActionCreator.addInFavorites(adaptedHotel));
+        dispatch(ActionCreator.addInFavorites(hotel));
       } else {
         dispatch(ActionCreator.removeFromFavorites(id));
       }

@@ -1,5 +1,4 @@
-import {extend} from "../../utils";
-import { getAdaptedHotel, getAdaptedReview } from "../../adapter";
+import { extend } from "../../utils";
 import { api } from "../../api";
 
 const initialState = {
@@ -56,11 +55,15 @@ const ActionCreator = {
 const Operation = {
   loadHotels: () => {
     return async (dispatch) => {
-      const hotels = await api.getHotels();
-      dispatch(ActionCreator.loadHotels(hotels))
-    } 
+      try {
+        const hotels = await api.getHotels();
+        dispatch(ActionCreator.loadHotels(hotels))
+      } catch {
+        console.log(`nok`)
+      }
+    }
   },
-  
+
   loadReviews: (id, onSuccess, onError) => {
     return async (dispatch) => {
       try {
@@ -69,21 +72,19 @@ const Operation = {
         onSuccess();
       } catch {
         onError();
-      }  
+      }
     }
   },
 
   loadNearbyHotels: (id, onSuccess, onError) => {
     return async (dispatch) => {
       try {
-        const response = await fetch(`https://4.react.pages.academy/six-cities/hotels/${id}/nearby`);
-        const nearbyHotels = await response.json();
-        const adaptedNearbyHotels = nearbyHotels.map(getAdaptedHotel);
-        dispatch(ActionCreator.loadNearbyHotels(adaptedNearbyHotels))
+        const nearbyHotels = await api.getNearbyHotels(id);
+        dispatch(ActionCreator.loadNearbyHotels(nearbyHotels))
         onSuccess();
       } catch {
         onError();
-      }   
+      }
     }
   }
 };
@@ -94,17 +95,17 @@ const reducer = (state = initialState, action) => {
       return extend(state, {
         hotels: action.payload
       });
-    
+
     case ActionType.LOAD_REVIEWS:
       return extend(state, {
         reviews: action.payload
       });
-    
+
     case ActionType.CLEANUP_REVIEWS:
       return extend(state, {
         reviews: action.payload
       });
-    
+
     case ActionType.LOAD_NEARBY_HOTELS:
       return extend(state, {
         nearbyHotels: action.payload
@@ -120,4 +121,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export {reducer, ActionCreator, Operation};
+export { reducer, ActionCreator, Operation };

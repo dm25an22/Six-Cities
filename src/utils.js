@@ -43,7 +43,7 @@ const getImgForRoomGallery = (images) => {
 const getformatDateForReview = (date) => {
   const newDate = new Date(date);
 
-  const month = MONTHS[newDate.getMonth() + 1];
+  const month = MONTHS[newDate.getMonth()];
   const year = newDate.getFullYear();
 
   return `${month} ${year}`;

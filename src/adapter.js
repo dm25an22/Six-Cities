@@ -35,6 +35,10 @@ const getAdaptedHotel = (data) => {
   }
 };
 
+const getAdaptedHotels = (hotels) => {
+  return hotels.map((hotel) => getAdaptedHotel(hotel))
+}
+
 const getAdaptedReview = (data) => {
   return {
     comment: data.comment,
@@ -48,6 +52,10 @@ const getAdaptedReview = (data) => {
       name: data.user.name
     }
   }
+};
+
+const getAdaptedReviews = (reviews) => {
+  return reviews.map((review) => getAdaptedReview(review))
 }
 
 const getAdaptedUserDate = (data) => {
@@ -63,5 +71,7 @@ const getAdaptedUserDate = (data) => {
 export {
   getAdaptedHotel,
   getAdaptedReview,
-  getAdaptedUserDate
+  getAdaptedUserDate,
+  getAdaptedHotels,
+  getAdaptedReviews
 }

@@ -12,8 +12,6 @@ const FavoriteCard = ({ hotel }) => {
   const ratingInPercent = getRatingByPercent(rating);
   const status = 0;
 
-  console.log(id)
-
   return (
     <article
       
