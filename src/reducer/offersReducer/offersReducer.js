@@ -1,5 +1,6 @@
 import {extend} from "../../utils";
 import { getAdaptedHotel, getAdaptedReview } from "../../adapter";
+import { api } from "../../api";
 
 const initialState = {
   hotels: [],
@@ -55,20 +56,16 @@ const ActionCreator = {
 const Operation = {
   loadHotels: () => {
     return async (dispatch) => {
-      const response = await fetch(`https://4.react.pages.academy/six-cities/hotels`);
-      const hotels = await response.json();
-      const adaptedHotels = hotels.map(getAdaptedHotel)
-      dispatch(ActionCreator.loadHotels(adaptedHotels))
+      const hotels = await api.getHotels();
+      dispatch(ActionCreator.loadHotels(hotels))
     } 
   },
   
   loadReviews: (id, onSuccess, onError) => {
     return async (dispatch) => {
       try {
-        const response = await fetch(`https://4.react.pages.academy/six-cities/comments/${id}`);
-        const reviews = await response.json();
-        const adaptedReviews = reviews.map(getAdaptedReview);
-        dispatch(ActionCreator.loadReviews(adaptedReviews))
+        const reviews = await api.getReviews(id);
+        dispatch(ActionCreator.loadReviews(reviews))
         onSuccess();
       } catch {
         onError();
