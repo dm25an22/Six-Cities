@@ -59,8 +59,9 @@ const getUniqueLocations = (hotels) => {
 
 const removeHotelFromFavorites = (favorites, id) => {
   const index = favorites.findIndex((it) => it.id === id);
+  favorites.splice(index, 1);
 
-  return favorites.splice(index, 1);
+  return favorites;
 }
 
 const checkInFavorites = (favorites, id) => {

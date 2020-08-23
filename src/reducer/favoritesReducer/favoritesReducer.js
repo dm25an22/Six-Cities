@@ -62,7 +62,7 @@ const Operation = {
       if (status) {
         dispatch(ActionCreator.addInFavorites(adaptedHotel));
       } else {
-        dispatch(ActionCreator.removeFromFavorites(adaptedHotel.id));
+        dispatch(ActionCreator.removeFromFavorites(id));
       }
     }
   }

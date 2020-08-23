@@ -2,24 +2,30 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { AppRoute } from "../enums";
 import { getRatingByPercent } from "../utils";
+import { useDispatch } from "react-redux";
+import { Operation } from "../reducer/favoritesReducer/favoritesReducer";
 
 const FavoriteCard = ({ hotel }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
   const { price, rating, title, type, previewImage, id } = hotel;
   const ratingInPercent = getRatingByPercent(rating);
+  const status = 0;
 
-  console.log(previewImage);
+  console.log(id)
 
   return (
     <article
-      onClick={(evt) => {
-        evt.preventDefault();
-        history.push(`${AppRoute.ROOM}/${id}`);
-      }}
+      
       className="favorites__card place-card"
     >
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <a href="/">
+        <a
+        onClick={(evt) => {
+          evt.preventDefault();
+          history.push(`${AppRoute.ROOM}/${id}`);
+        }} 
+        href="/">
           <img
             className="place-card__image"
             src={previewImage}
@@ -36,6 +42,9 @@ const FavoriteCard = ({ hotel }) => {
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
+            onClick={() => {
+              dispatch(Operation.toggleIsFavorite(id, status));
+            }}
             className="place-card__bookmark-button place-card__bookmark-button--active button"
             type="button"
           >

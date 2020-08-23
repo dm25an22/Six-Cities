@@ -15,10 +15,8 @@ const PlaceCard = ({ hotel }) => {
   const { price, rating, title, type, previewImage, isPremium, id } = hotel;
   const ratingInPercent = getRatingByPercent(rating);
   const isFavorite = checkInFavorites(favorites, id);
-
+  
   const status = isFavorite ? 0 : 1;
-
-  console.log(isFavorite);
 
   return (
     <article
@@ -60,7 +58,7 @@ const PlaceCard = ({ hotel }) => {
               onClick={() => {
                 dispatch(Operation.toggleIsFavorite(id, status));
               }}
-              className={`place-card__bookmark-button ${isFavorite &&`place-card__bookmark-button--active`} button`}
+              className={`place-card__bookmark-button ${isFavorite && `place-card__bookmark-button--active`} button`}
               type="button"
             >
               <svg className="place-card__bookmark-icon" width="18" height="19">
