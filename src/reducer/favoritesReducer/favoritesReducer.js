@@ -1,4 +1,3 @@
-import { getAdaptedHotel } from "../../adapter";
 import { api } from "../../api";
 
 const { extend, removeHotelFromFavorites } = require("../../utils");

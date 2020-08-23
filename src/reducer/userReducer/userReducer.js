@@ -1,6 +1,6 @@
 import { extend } from "../../utils";
-import { getAdaptedUserDate } from "../../adapter";
 import {Operation as favoritesOperation} from "../favoritesReducer/favoritesReducer"
+import { api } from "../../api";
 
 const initialState = {
   authorizationStatus: false,
@@ -39,48 +39,24 @@ const ActionCreator = {
 const Operation = {
   checkAuthStatus: () => {
     return async (dispatch) => {
-        const response = await fetch(
-          `https://4.react.pages.academy/six-cities/login`,
-          {
-            credentials: "include",
-          }
-        );
-
-        if (response.status === 401) {
-          dispatch(ActionCreator.checkAuthStatus(false));
-        } else {
-          dispatch(ActionCreator.checkAuthStatus(true));
-        }
-
-        const authInfo = await response.json();
-        dispatch(ActionCreator.setUserData(getAdaptedUserDate(authInfo)));
-        dispatch(favoritesOperation.loadFavorites())
+      try {
+        const authInfo = await api.checkAuthStatus();
+        dispatch(ActionCreator.checkAuthStatus(true));
+        dispatch(ActionCreator.setUserData(authInfo));
+        dispatch(favoritesOperation.loadFavorites());
+      } catch {
+        dispatch(ActionCreator.checkAuthStatus(false));
+      }
     };
   },
 
   login: (userData, onSuccess, onError) => {
     return async (dispatch) => {
       try {
-        const response = await fetch(
-          `https://4.react.pages.academy/six-cities/login`,
-          {
-            method: `POST`,
-            headers: {
-              "Content-Type": "application/json;charset=utf-8",
-            },
-            body: JSON.stringify(userData),
-            credentials: "include",
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error()
-        }
-
-        const authInfo = await response.json();
+        const authInfo = await api.login(userData);
+        dispatch(ActionCreator.setUserData(authInfo));
         dispatch(ActionCreator.checkAuthStatus(true));
-        dispatch(ActionCreator.setUserData(getAdaptedUserDate(authInfo)));
-        dispatch(favoritesOperation.loadFavorites())
+        dispatch(favoritesOperation.loadFavorites());
         onSuccess();
       }
       catch {

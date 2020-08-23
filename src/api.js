@@ -1,9 +1,13 @@
-import { getAdaptedHotels, getAdaptedReviews, getAdaptedHotel } from "./adapter"
+import { getAdaptedHotels, getAdaptedReviews, getAdaptedHotel, getAdaptedUserDate } from "./adapter";
+
+const StatusCode = {
+  Unauthorized: 401
+};
 
 const Methods = {
   GET: `GET`,
   POST: `POST`
-}
+};
 
 const endPoint = `https://4.react.pages.academy/six-cities`;
 
@@ -41,13 +45,59 @@ export const api = {
     const hotel = await response.json();
 
     return getAdaptedHotel(hotel);
-  }
-}
+  },
 
-const request = (url, method = Methods.GET, body = null) => {
+  async checkAuthStatus() {
+    const response = await request(`login`);
+
+    if (response.status === StatusCode.Unauthorized) {
+      throw new Error();
+    }
+
+    const userDate = await response.json();
+    return getAdaptedUserDate(userDate);
+  },
+
+  async login(userData) {
+    const response = await request(
+      `login`,
+      Methods.POST,
+      JSON.stringify(userData),
+      new Headers({ "Content-Type": "application/json;charset=utf-8" })
+    );
+
+    if (!response.ok) {
+      throw new Error()
+    }
+
+    const authInfo = await response.json();
+
+    return getAdaptedUserDate(authInfo);
+  },
+
+  async addReview(id, newReview) {
+    const response = await request(
+      `comments/${id}`,
+      Methods.POST,
+      JSON.stringify(newReview),
+      new Headers({ "Content-Type": "application/json;charset=utf-8" })
+    );
+
+    if (!response.ok) {
+      throw new Error()
+    }
+
+    const reviews = response.json();
+
+    return getAdaptedReviews(reviews);
+  }
+};
+
+const request = (url, method = Methods.GET, body = null, headers = new Headers()) => {
   return fetch(`${endPoint}/${url}`, {
     method,
     body,
+    headers,
     credentials: `include`
-  })
-}
+  });
+};
