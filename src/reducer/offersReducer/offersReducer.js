@@ -3,7 +3,6 @@ import { api } from "../../api";
 
 const initialState = {
   hotels: [],
-  reviews: [],
   nearbyHotels: []
 };
 
@@ -20,20 +19,6 @@ const ActionCreator = {
     return {
       type: ActionType.LOAD_HOTELS,
       payload: hotels
-    }
-  },
-
-  loadReviews(reviews) {
-    return {
-      type: ActionType.LOAD_REVIEWS,
-      payload: reviews
-    }
-  },
-
-  cleanupReviews() {
-    return {
-      type: ActionType.CLEANUP_REVIEWS,
-      payload: []
     }
   },
 
@@ -64,18 +49,6 @@ const Operation = {
     }
   },
 
-  loadReviews: (id, onSuccess, onError) => {
-    return async (dispatch) => {
-      try {
-        const reviews = await api.getReviews(id);
-        dispatch(ActionCreator.loadReviews(reviews))
-        onSuccess();
-      } catch {
-        onError();
-      }
-    }
-  },
-
   loadNearbyHotels: (id, onSuccess, onError) => {
     return async (dispatch) => {
       try {
@@ -94,16 +67,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_HOTELS:
       return extend(state, {
         hotels: action.payload
-      });
-
-    case ActionType.LOAD_REVIEWS:
-      return extend(state, {
-        reviews: action.payload
-      });
-
-    case ActionType.CLEANUP_REVIEWS:
-      return extend(state, {
-        reviews: action.payload
       });
 
     case ActionType.LOAD_NEARBY_HOTELS:

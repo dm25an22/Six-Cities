@@ -1,11 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import RoomReviewItem from "../room-review-item/room-review-item";
 import { useSelector, useDispatch } from "react-redux";
-import { getSortedReviews } from "../../reducer/offersReducer/selectors";
-import {Operation as OffersOperation, ActionCreator} from "../../reducer/offersReducer/offersReducer";
+import { getSortedReviews } from "../../reducer/reviews/selector";
+import {Operation as reviewsOperation, ActionCreator} from "../../reducer/reviews/reviews";
 import { ContextRoom } from "../../context";
-import RoomAddReview from "../room-add-review";
-import { getAuthStatus } from "../../reducer/userReducer/selector";
 
 const getMurkupReviews = (isLoaded, reviews) => {
   if (isLoaded) {
@@ -29,20 +27,18 @@ const getMurkupReviews = (isLoaded, reviews) => {
 const RoomReview = ({isLoad, onSuccess, onError}) => {
   const {hotel} = useContext(ContextRoom);
   const reviews = useSelector(getSortedReviews);
-  const authStatus = useSelector(getAuthStatus);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(OffersOperation.loadReviews(hotel.id, onSuccess, onError));
+    dispatch(reviewsOperation.loadReviews(hotel.id, onSuccess, onError));
 
     return () => {
       dispatch(ActionCreator.cleanupReviews())
     }
   }, [dispatch, hotel.id, onError, onSuccess]);
 
-  return (
-    <section className="property__reviews reviews">
-      
+  return (   
+    <React.Fragment>   
       {isLoad === null 
         ? 
       <div style={{padding: `50px 20px`}}>
@@ -51,10 +47,7 @@ const RoomReview = ({isLoad, onSuccess, onError}) => {
         :
         getMurkupReviews(isLoad, reviews)
       } 
-      
-      {authStatus && <RoomAddReview />}
-      
-    </section>
+    </React.Fragment>      
   );
 }
 

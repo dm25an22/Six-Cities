@@ -1,13 +1,41 @@
-import React from "react";
+import React, { useState, useContext } from "react";
+import { useDispatch } from "react-redux";
+import { Operation as reviewsOperation } from "../reducer/reviews/reviews";
+import { ContextRoom } from "../context";
+
+const MIN_CHARACTERS = 50;
+const MAX_CHARACTERS = 300;
 
 const RoomAddReview = () => {
+  const [textReview, setTexReview] = useState(``);
+  const [rating, setRating] = useState(0);
+  const {hotel} = useContext(ContextRoom)
+  const dispath = useDispatch();
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      onSubmit={(evt) => {
+        evt.preventDefault();
+
+        const newReview = {
+          comment: textReview,
+          rating: rating
+        }
+
+        dispath(reviewsOperation.addReview(hotel.id, newReview))
+      }}
+      className="reviews__form form"
+      action="#"
+      method="post"
+    >
       <label className="reviews__label form__label" htmlFor="review">
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
         <input
+          onChange={(evt) => {
+            setRating(Number(evt.target.value));
+          }}
           className="form__rating-input visually-hidden"
           name="rating"
           defaultValue={5}
@@ -24,6 +52,9 @@ const RoomAddReview = () => {
           </svg>
         </label>
         <input
+          onChange={(evt) => {
+            setRating(Number(evt.target.value));
+          }}
           className="form__rating-input visually-hidden"
           name="rating"
           defaultValue={4}
@@ -40,6 +71,9 @@ const RoomAddReview = () => {
           </svg>
         </label>
         <input
+          onChange={(evt) => {
+            setRating(Number(evt.target.value));
+          }}
           className="form__rating-input visually-hidden"
           name="rating"
           defaultValue={3}
@@ -56,6 +90,9 @@ const RoomAddReview = () => {
           </svg>
         </label>
         <input
+          onChange={(evt) => {
+            setRating(Number(evt.target.value));
+          }}
           className="form__rating-input visually-hidden"
           name="rating"
           defaultValue={2}
@@ -72,6 +109,9 @@ const RoomAddReview = () => {
           </svg>
         </label>
         <input
+          onChange={(evt) => {
+            setRating(Number(evt.target.value));
+          }}
           className="form__rating-input visually-hidden"
           name="rating"
           defaultValue={1}
@@ -89,6 +129,9 @@ const RoomAddReview = () => {
         </label>
       </div>
       <textarea
+        onChange={(evt) => {
+          setTexReview(evt.target.value);
+        }}
         className="reviews__textarea form__textarea"
         id="review"
         name="review"
@@ -104,7 +147,13 @@ const RoomAddReview = () => {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled
+          disabled={
+            textReview.length >= MIN_CHARACTERS &&
+            textReview.length < MAX_CHARACTERS &&
+            rating
+              ? false
+              : true
+          }
         >
           Submit
         </button>

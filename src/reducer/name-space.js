@@ -1,5 +1,6 @@
 export const NameSpace = {
   OFFERS: `OFFERS`,
   USER: `USER`,
-  FAVORITES: `FAVORITES`
+  FAVORITES: `FAVORITES`,
+  REVIEWS: `REVIEWS`
 };

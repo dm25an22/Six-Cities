@@ -84,10 +84,12 @@ export const api = {
     );
 
     if (!response.ok) {
+      console.log(response);
+
       throw new Error()
     }
 
-    const reviews = response.json();
+    const reviews = await response.json();
 
     return getAdaptedReviews(reviews);
   }
