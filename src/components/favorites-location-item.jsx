@@ -2,14 +2,14 @@ import React from "react";
 import FavoriteCard from "./favorite-card";
 import { Link } from "react-router-dom";
 import { AppRoute } from "../enums";
-import { ActionCreator } from "../reducer/app-state/app-state";
+import { ActionCreator as appStateActionCreator} from "../reducer/app-state/app-state";
 import { useDispatch } from "react-redux";
 
 const FavoritesLocationItem = ({ location, hotels }) => {
   const dispatch = useDispatch();
 
   const setActiveLocation = (city) => {
-    dispatch(ActionCreator.changeLocation(city));
+    dispatch(appStateActionCreator.changeLocation(city));
   };
 
   return (

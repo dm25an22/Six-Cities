@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Header from "../header/header";
 import { useDispatch, useSelector } from "react-redux";
-import { Operation } from "../../reducer/userReducer/userReducer";
+import { Operation } from "../../reducer/user/user";
 import { useHistory, Redirect } from "react-router-dom";
-import { getAuthStatus } from "../../reducer/userReducer/selector";
+import { getAuthStatus } from "../../reducer/user/selector";
 import { AppRoute } from "../../enums";
 
 const SignIn = () => {

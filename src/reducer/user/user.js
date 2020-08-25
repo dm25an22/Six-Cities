@@ -1,5 +1,5 @@
 import { extend } from "../../utils";
-import {Operation as favoritesOperation} from "../favoritesReducer/favoritesReducer"
+import {Operation as favoritesOperation} from "../favorites/favorites"
 import { api } from "../../api";
 
 const initialState = {

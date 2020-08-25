@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AppRoute } from "../../enums";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserData, getAuthStatus } from "../../reducer/userReducer/selector";
+import { getUserData, getAuthStatus } from "../../reducer/user/selector";
 import { ActionCreator } from "../../reducer/app-state/app-state";
 
 const Header = () => {

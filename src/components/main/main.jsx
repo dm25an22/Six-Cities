@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import Header from "../header/header";
 import { useSelector } from "react-redux";
-import { getLocations, getHotels } from "../../reducer/offersReducer/selectors";
+import { getLocations, getHotels } from "../../reducer/offers/selectors";
 import LacationList from "../lacation-list/lacation-list";
 import Cities from "../cities/cities";
 import NoPlacesAvailable from "../no-places-available/no-places-available";

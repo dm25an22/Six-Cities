@@ -6,8 +6,8 @@ import ReduxThunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import App from "./app";
 import { rootReducer } from "./reducer/rootReducer";
-import { Operation as OffersOperation } from "./reducer/offersReducer/offersReducer";
-import { Operation as UserOpertaion } from "./reducer/userReducer/userReducer";
+import { Operation as OffersOperation } from "./reducer/offers/offers";
+import { Operation as UserOpertaion } from "./reducer/user/user";
 
 const store = createStore(
   rootReducer,

@@ -8,11 +8,11 @@ import RoomNearHotelsList from "../room-near-hotels-list/room-near-hotels-list";
 import {useRouteMatch} from "react-router-dom";
 import {getHotelById} from "../../utils";
 import {useSelector} from "react-redux";
-import {getHotels} from "../../reducer/offersReducer/selectors";
+import {getHotels} from "../../reducer/offers/selectors";
 import {ContextRoom} from "../../context";
 import withLoadStatus from "../../hocs/with-load-status/with-load-status";
 import RoomAddReview from "../room-add-review";
-import { getAuthStatus } from "../../reducer/userReducer/selector";
+import { getAuthStatus } from "../../reducer/user/selector";
 
 const RoomReviewWrapped = withLoadStatus(RoomReview);
 const RoomNearHotelsListWrapped = withLoadStatus(RoomNearHotelsList);

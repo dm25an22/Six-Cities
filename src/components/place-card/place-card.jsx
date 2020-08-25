@@ -3,9 +3,9 @@ import { getRatingByPercent, checkInFavorites } from "../../utils";
 import { useHistory } from "react-router-dom";
 import { AppRoute } from "../../enums";
 import { useSelector, useDispatch } from "react-redux";
-import { getAuthStatus } from "../../reducer/userReducer/selector";
-import { getFavorites } from "../../reducer/favoritesReducer/selector";
-import { Operation } from "../../reducer/favoritesReducer/favoritesReducer";
+import { getAuthStatus } from "../../reducer/user/selector";
+import { getFavorites } from "../../reducer/favorites/selector";
+import { Operation } from "../../reducer/favorites/favorites";
 
 const PlaceCard = ({ hotel }) => {
   const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import {combineReducers} from "redux";
 import {NameSpace} from "./name-space";
-import {reducer as offersReducer} from "./offersReducer/offersReducer";
-import {reducer as userReducer} from "./userReducer/userReducer";
-import {reducer as favoritesReducer} from "./favoritesReducer/favoritesReducer";
+import {reducer as offersReducer} from "./offers/offers";
+import {reducer as userReducer} from "./user/user";
+import {reducer as favoritesReducer} from "./favorites/favorites";
 import {reducer as reviewsReducer} from "./reviews/reviews"
 import {reducer as appStateReducer} from "./app-state/app-state";
 

@@ -4,9 +4,9 @@ import { getRatingByPercent, checkInFavorites } from "../../utils";
 import RoomInsideList from "../room-inside-list/room-inside-list";
 import RoomHost from "../room-host/room-host";
 import { useSelector, useDispatch } from "react-redux";
-import { getAuthStatus } from "../../reducer/userReducer/selector";
-import { getFavorites } from "../../reducer/favoritesReducer/selector";
-import { Operation } from "../../reducer/favoritesReducer/favoritesReducer";
+import { getAuthStatus } from "../../reducer/user/selector";
+import { getFavorites } from "../../reducer/favorites/selector";
+import { Operation } from "../../reducer/favorites/favorites";
 
 const RoomInfo = () => {
   const { hotel } = useContext(ContextRoom);

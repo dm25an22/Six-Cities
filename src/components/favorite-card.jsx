@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { AppRoute } from "../enums";
 import { getRatingByPercent } from "../utils";
 import { useDispatch } from "react-redux";
-import { Operation } from "../reducer/favoritesReducer/favoritesReducer";
+import { Operation } from "../reducer/favorites/favorites";
 
 const FavoriteCard = ({ hotel }) => {
   const history = useHistory();

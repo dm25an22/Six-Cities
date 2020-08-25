@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getNearbyHotelsMax } from "../../reducer/offersReducer/selectors";
-import { Operation, ActionCreator } from "../../reducer/offersReducer/offersReducer";
+import { getNearbyHotelsMax } from "../../reducer/offers/selectors";
+import { Operation, ActionCreator } from "../../reducer/offers/offers";
 import { ContextRoom } from "../../context";
 import PlaceCard from "../place-card/place-card";
 

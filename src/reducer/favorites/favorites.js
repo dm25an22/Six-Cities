@@ -1,6 +1,5 @@
 import { api } from "../../api";
-
-const { extend, removeHotelFromFavorites } = require("../../utils");
+import { extend, removeHotelFromFavorites } from "../../utils";
 
 const initialState = {
   favorites: []
