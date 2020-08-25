@@ -1,18 +1,36 @@
 import React from "react";
 import FavoriteCard from "./favorite-card";
+import { Link } from "react-router-dom";
+import { AppRoute } from "../enums";
+import { ActionCreator } from "../reducer/app-state/app-state";
+import { useDispatch } from "react-redux";
 
-const FavoritesLocationItem = ({location, hotels}) => {
+const FavoritesLocationItem = ({ location, hotels }) => {
+  const dispatch = useDispatch();
+
+  const setActiveLocation = (city) => {
+    dispatch(ActionCreator.changeLocation(city));
+  };
+
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <a className="locations__item-link" href="/">
+          <Link
+            to={AppRoute.ROOT}
+            onClick={() => {
+              setActiveLocation(location);
+            }}
+            className="locations__item-link"
+          >
             <span>{location}</span>
-          </a>
+          </Link>
         </div>
       </div>
       <div className="favorites__places">
-        {hotels.map((hotel) => <FavoriteCard key={hotel.id} hotel={hotel} /> )}
+        {hotels.map((hotel) => (
+          <FavoriteCard key={hotel.id} hotel={hotel} />
+        ))}
       </div>
     </li>
   );

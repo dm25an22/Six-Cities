@@ -1,12 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AppRoute } from "../../enums";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { getUserData, getAuthStatus } from "../../reducer/userReducer/selector";
+import { ActionCreator } from "../../reducer/app-state/app-state";
 
 const Header = () => {
+  const dispatch = useDispatch();
   const authStatus = useSelector(getAuthStatus);
   const userData = useSelector(getUserData);
+
+  const setInitialActiveLocation = () => {
+    dispatch(ActionCreator.changeLocation(`Amsterdam`))
+  };
 
   return (
     <header className="header">
@@ -14,6 +20,7 @@ const Header = () => {
         <div className="header__wrapper">
           <div className="header__left">
             <Link
+              onClick={setInitialActiveLocation}
               to={AppRoute.ROOT}
               className="header__logo-link header__logo-link--active"
             >

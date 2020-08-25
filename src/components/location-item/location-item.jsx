@@ -1,7 +1,13 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { ActionCreator } from "../../reducer/app-state/app-state";
 
-const LocationItem = ({city, setActiveLocation, isActive}) => {
+const LocationItem = ({city, isActive}) => {
+  const dispatch = useDispatch();
 
+  const setActiveLocation = (city) => {
+    dispatch(ActionCreator.changeLocation(city));
+  }
 
   return (
     <li className="locations__item">

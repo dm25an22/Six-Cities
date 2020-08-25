@@ -1,7 +1,7 @@
 import { extend } from "../../utils";
 
 const initialState = {
-  activeLocation: null
+  activeLocation: `Amsterdam`
 };
 
 const ActionType = {

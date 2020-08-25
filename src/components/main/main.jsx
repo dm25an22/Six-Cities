@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React from "react";
 import Header from "../header/header";
 import { useSelector } from "react-redux";
 import { getLocations, getHotels } from "../../reducer/offersReducer/selectors";
@@ -7,10 +7,11 @@ import LacationList from "../lacation-list/lacation-list";
 import Cities from "../cities/cities";
 import NoPlacesAvailable from "../no-places-available/no-places-available";
 import { getHotelsByLocation } from "../../utils";
+import { getActiveLocation } from "../../reducer/app-state/selector";
 
 const Main = () => {
   const locations = useSelector(getLocations);
-  const [activeLocation, setActiveLocation] = useState(locations[0]);
+  const activeLocation = useSelector(getActiveLocation);
   const hotels = useSelector(getHotels);
   let hotelsByLocation = getHotelsByLocation(hotels, activeLocation);
 
@@ -30,7 +31,6 @@ const Main = () => {
 
         <LacationList
           activeLocation={activeLocation}
-          setActiveLocation={setActiveLocation}
           locations={locations}
         />
 

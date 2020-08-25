@@ -1,7 +1,7 @@
 import React from "react";
 import LocationItem from "../location-item/location-item";
 
-const LacationList = ({activeLocation, setActiveLocation, locations}) => { 
+const LacationList = ({activeLocation, locations}) => { 
   return (
     <div className="tabs">
       <section className="locations container">
@@ -11,7 +11,6 @@ const LacationList = ({activeLocation, setActiveLocation, locations}) => {
               <LocationItem 
                 key={city} 
                 city={city}
-                setActiveLocation={setActiveLocation}
                 isActive={activeLocation === city}
               />
             );
