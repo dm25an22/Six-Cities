@@ -47,13 +47,14 @@ const Operation = {
     }
   },
 
-  addReview: (id, newReview) => {
+  addReview: (id, newReview, onSuccess, onError) => {
     return async (dispatch) => {
       try {
         const reviews = await api.addReview(id, newReview);
-        console.log(reviews);
         dispatch(ActionCreator.addReview(reviews));
+        onSuccess();
       } catch {
+        onError();
       }
     }
   }

@@ -10,9 +10,18 @@ const AppRoute = {
   ROOM: `/room`,
   LOGIN: `/login`,
   FAVORITES: `/favorites`
-}
+};
+
+const RatingStarsCount = {
+  FIVE: `perfect`,
+  FOUR: `good`,
+  THREE: `not bad`,
+  TWO: `badly`,
+  ONE: `terribly`,
+};
 
 export {
   TypeSort,
-  AppRoute
+  AppRoute,
+  RatingStarsCount
 }
