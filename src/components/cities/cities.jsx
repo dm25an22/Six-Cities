@@ -3,9 +3,11 @@ import PlacesSorting from "../places-sorting/places-sorting";
 import PlacesList from "../places-list/places-list";
 import { TypeSort } from "../../enums";
 import {getSortedHotels} from '../../utils';
+import CityMap from "../city-map/city-map";
 
 const Cities = ({hotels, activeLocation}) => {
   const [activeSortType, setSorttype] = useState(TypeSort.POPULAR);
+  const [activeMarker, setActiveMarker] = useState(null);
   const hotelsBySort = getSortedHotels(hotels ,activeSortType);
   
   return (
@@ -21,10 +23,10 @@ const Cities = ({hotels, activeLocation}) => {
             setActiveSortType={setSorttype}
             activeSortType={activeSortType}
           />
-          <PlacesList hotels={hotelsBySort} />
+          <PlacesList hotels={hotelsBySort} setActiveMarker={setActiveMarker} />
         </section>
         <div className="cities__right-section">
-          <section className="cities__map map" />
+          <CityMap hotels={hotels} activeMarker={activeMarker} setActiveMarker={setActiveMarker}/>
         </div>
       </div>
     </div>

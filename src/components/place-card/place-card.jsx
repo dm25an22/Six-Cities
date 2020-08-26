@@ -7,7 +7,7 @@ import { getAuthStatus } from "../../reducer/user/selector";
 import { getFavorites } from "../../reducer/favorites/selector";
 import { Operation } from "../../reducer/favorites/favorites";
 
-const PlaceCard = ({ hotel }) => {
+const PlaceCard = ({ hotel, setActiveMarker }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const authStatus = useSelector(getAuthStatus);
@@ -20,7 +20,14 @@ const PlaceCard = ({ hotel }) => {
 
   return (
     <article
-  
+    onMouseEnter={() => {
+      setActiveMarker(id);
+    }}
+
+    onMouseLeave={() => {
+      setActiveMarker(null);
+    }}
+
     className="cities__place-card place-card"
     >
       {isPremium && (
