@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import leaflet from "leaflet";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { AppRoute } from "../../enums";
+import { getRatingByPercent } from "../../utils";
 
 const CityMap = ({ hotels, activeMarker, setActiveMarker }) => {
   const [card, setCard] = useState(null);
@@ -15,52 +16,89 @@ const CityMap = ({ hotels, activeMarker, setActiveMarker }) => {
     iconUrl: `img/pin-active.svg`,
   });
 
-  const city = hotels[0].city.location;
+  const customPopup = (title, price, rating) => {
+    return (
+      `<div>${title}<br /><strong>&euro; ${price}</strong></div>
+      <div class="place-card__stars rating__stars">
+        <span style="width: ${getRatingByPercent(rating)}%"></span>
+        <span class="visually-hidden">Rating</span>
+      </div>`
+    );
+  }  
 
-  const cityCoordinates = [city.latitude, city.longitude];
+  const initMap = useCallback(
+    () => {
+      const city = hotels[0].city.location;
+      const cityCoordinates = [city.latitude, city.longitude];
+  
+      const map = leaflet.map(`map`, {
+        center: cityCoordinates,
+        zoom: city.zoom,
+        zoomControl: false,
+        marker: true,
+      });
+  
+      map.setView(cityCoordinates, city.zoom);
+  
+      leaflet
+        .tileLayer(
+          `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
+          {
+            attribution:
+              '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          }
+        )
+        .addTo(map);
+  
+      setCard(map);
+    },
+    [hotels]
+  );
 
-  const initMap = () => {
-    const map = leaflet.map(`map`, {
-      center: cityCoordinates,
-      zoom: city.zoom,
-      zoomControl: false,
-      marker: true,
+  const updateCard = () => {
+    hotels.forEach((hotel) => {
+      const {
+        id,
+        location,
+        title,
+        price,
+        rating
+      } = hotel;
+
+      const marker = activeMarker === id ? iconActive : icon;
+      const popup = customPopup(title, price, rating);
+
+      const currentMarker = leaflet
+        .marker([location.latitude, location.longitude], { icon: marker })
+        .on("click", () => history.push(`${AppRoute.ROOM}/${hotel.id}`))
+        .addTo(card).bindPopup(popup);
+
+      currentMarker.on("mouseover", () => {
+        currentMarker.openPopup();
+      });
     });
-
-    map.setView(cityCoordinates, city.zoom);
-
-    leaflet
-      .tileLayer(
-        `https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`,
-        {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        }
-      )
-      .addTo(map);
-
-    setCard(map);
-  };
+  }
 
   useEffect(() => {
-    initMap();
-  }, []);
+    if (card === null) {
+      initMap();
+    }
+    
+  }, [card, initMap]);
 
   useEffect(() => {
     if (card !== null) {
-      hotels.forEach((hotel) => {
-        const marker = activeMarker === hotel.id ? iconActive : icon;
-        const location = hotel.location;
-        leaflet
-          .marker([location.latitude, location.longitude], { icon: marker })
-          .on("click", () => history.push(`${AppRoute.ROOM}/${hotel.id}`))
-          .addTo(card);
-      });
+      updateCard();
     }
   });
 
   return (
-    <section className="cities__map map">
+    <section
+      onMouseLeave={() => {
+        card.closePopup();
+      }}
+      className="cities__map map"
+    >
       <div id="map" style={{ width: `100%`, height: `100%` }}></div>
     </section>
   );

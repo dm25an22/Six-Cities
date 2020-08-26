@@ -19,7 +19,6 @@ const Cities = ({hotels, activeLocation}) => {
             {hotels.length} places to stay in {activeLocation}
           </b>
           <PlacesSorting
-            key={activeLocation}
             setActiveSortType={setSorttype}
             activeSortType={activeSortType}
           />
