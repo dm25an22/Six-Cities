@@ -1,6 +1,6 @@
 import React from "react";
 import { getRatingByPercent, checkInFavorites } from "../utils";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AppRoute } from "../enums";
 import { useSelector, useDispatch } from "react-redux";
 import { getAuthStatus } from "../reducer/user/selector";
@@ -9,7 +9,6 @@ import { Operation } from "../reducer/favorites/favorites";
 
 const PlaceCard = ({ hotel, setActiveMarker }) => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const authStatus = useSelector(getAuthStatus);
   const favorites = useSelector(getFavorites);
   const { price, rating, title, type, previewImage, isPremium, id } = hotel;
@@ -36,14 +35,7 @@ const PlaceCard = ({ hotel, setActiveMarker }) => {
         </div>
       )}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a 
-          onClick={(evt) => {
-            evt.preventDefault();
-            history.push(`${AppRoute.ROOM}/${id}`);
-          }}
-          href="/"
-        >
-          
+        <Link to={`${AppRoute.ROOM}/${id}`}>
           <img
             className="place-card__image"
             src={previewImage}
@@ -51,7 +43,7 @@ const PlaceCard = ({ hotel, setActiveMarker }) => {
             height="200"
             alt="Place"
           />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -82,7 +74,7 @@ const PlaceCard = ({ hotel, setActiveMarker }) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="/">{title}</a>
+          <Link to={`${AppRoute.ROOM}/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
