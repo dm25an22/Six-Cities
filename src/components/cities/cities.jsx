@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import PlacesSorting from "../places-sorting/places-sorting";
 import PlacesList from "../places-list/places-list";
 import { TypeSort } from "../../enums";
-import {getSortedHotels} from '../../utils';
+import { getSortedHotels } from "../../utils";
 import CityMap from "../city-map/city-map";
 
-const Cities = ({hotels, activeLocation}) => {
+const Cities = ({ hotels, activeLocation }) => {
   const [activeSortType, setSorttype] = useState(TypeSort.POPULAR);
   const [activeMarker, setActiveMarker] = useState(null);
-  const hotelsBySort = getSortedHotels(hotels ,activeSortType);
-  
+  const hotelsBySort = getSortedHotels(hotels, activeSortType);
+
   return (
     <div className="cities">
       <div className="cities__places-container container">
@@ -25,7 +25,13 @@ const Cities = ({hotels, activeLocation}) => {
           <PlacesList hotels={hotelsBySort} setActiveMarker={setActiveMarker} />
         </section>
         <div className="cities__right-section">
-          <CityMap hotels={hotels} activeMarker={activeMarker} setActiveMarker={setActiveMarker}/>
+          <section className="cities__map map">
+            <CityMap
+              hotels={hotels}
+              activeMarker={activeMarker}
+              setActiveMarker={setActiveMarker}
+            />
+          </section>
         </div>
       </div>
     </div>
