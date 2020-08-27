@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
-import RoomGalleryItem from "../room-gallery-item/room-gallery-item";
-import {ContextRoom} from "../../context";
-import {getImgForRoomGallery} from "../../utils";
+import RoomGalleryItem from "./room-gallery-item";
+import {ContextRoom} from "../context";
+import {getImgForRoomGallery} from "../utils";
 
 const RoomGallery = () => {
   const {hotel} = useContext(ContextRoom);

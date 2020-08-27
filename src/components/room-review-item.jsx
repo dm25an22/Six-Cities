@@ -1,5 +1,5 @@
 import React from "react";
-import { getRatingByPercent, getformatDateForReview } from "../../utils";
+import { getRatingByPercent, getformatDateForReview } from "../utils";
 
 const RoomReviewItem = ({ review }) => {
   const {

@@ -1,5 +1,5 @@
 import React from "react";
-import LocationItem from "../location-item/location-item";
+import LocationItem from "./location-item";
 
 const LacationList = ({activeLocation, locations}) => { 
   return (

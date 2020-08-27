@@ -1,12 +1,12 @@
 import React from "react";
-import Header from "../header/header";
+import Header from "./header";
 import { useSelector } from "react-redux";
-import { getLocations, getHotels } from "../../reducer/offers/selectors";
-import LacationList from "../lacation-list/lacation-list";
-import Cities from "../cities/cities";
-import NoPlacesAvailable from "../no-places-available/no-places-available";
-import { getHotelsByLocation } from "../../utils";
-import { getActiveLocation } from "../../reducer/app-state/selector";
+import { getLocations, getHotels } from "../reducer/offers/selectors";
+import LacationList from "./lacation-list";
+import Cities from "./cities";
+import NoPlacesAvailable from "./no-places-available";
+import { getHotelsByLocation } from "../utils";
+import { getActiveLocation } from "../reducer/app-state/selector";
 
 const Main = () => {
   const locations = useSelector(getLocations);

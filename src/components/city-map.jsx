@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useCallback } from "react";
 import leaflet from "leaflet";
 import { useHistory } from "react-router-dom";
-import { AppRoute } from "../../enums";
-import { getRatingByPercent } from "../../utils";
+import { AppRoute } from "../enums";
+import { getRatingByPercent } from "../utils";
 
 const CityMap = ({ hotels, activeMarker }) => {
   const [card, setCard] = useState(null);

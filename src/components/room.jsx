@@ -1,21 +1,21 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
-import Header from "../header/header";
-import RoomGallery from "../room-gallery/room-gallery";
-import RoomInfo from "../room-info/room-info";
-import RoomReview from "../room-review/room-review";
-import RoomNearHotelsList from "../room-near-hotels-list/room-near-hotels-list";
+import Header from "./header";
+import RoomGallery from "./room-gallery";
+import RoomInfo from "./room-info";
+import RoomReview from "./room-review";
+import RoomNearHotels from "./room-near-hotels";
 import { useRouteMatch } from "react-router-dom";
-import { getHotelById } from "../../utils";
+import { getHotelById } from "../utils";
 import { useSelector } from "react-redux";
-import { getHotels } from "../../reducer/offers/selectors";
-import { ContextRoom } from "../../context";
-import withLoadStatus from "../../hocs/with-load-status/with-load-status";
-import RoomAddReview from "../room-add-review";
-import { getAuthStatus } from "../../reducer/user/selector";
+import { getHotels } from "../reducer/offers/selectors";
+import { ContextRoom } from "../context";
+import withLoadStatus from "../hocs/with-load-status/with-load-status";
+import RoomAddReview from "./room-add-review";
+import { getAuthStatus } from "../reducer/user/selector";
 
 const RoomReviewWrapped = withLoadStatus(RoomReview);
-const RoomNearHotelsListWrapped = withLoadStatus(RoomNearHotelsList);
+const RoomNearHotelsWrapped = withLoadStatus(RoomNearHotels);
 
 const Room = () => {
   window.scrollTo(0, 0);
@@ -42,7 +42,7 @@ const Room = () => {
             </div>
           </section>
           <div className="container">
-            <RoomNearHotelsListWrapped id={match.params.id} />
+            <RoomNearHotelsWrapped id={match.params.id} />
           </div>
         </main>
       </div>

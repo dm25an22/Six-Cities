@@ -1,5 +1,5 @@
 import React from "react";
-import Header from "./header/header";
+import Header from "./header";
 import Footer from "./footer";
 import FavoritesList from "./favorites-list";
 import FavoritesEmpty from "./favorites-empty";

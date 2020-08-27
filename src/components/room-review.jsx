@@ -1,9 +1,9 @@
 import React, { useEffect, useContext } from "react";
-import RoomReviewItem from "../room-review-item/room-review-item";
+import RoomReviewItem from "./room-review-item";
 import { useSelector, useDispatch } from "react-redux";
-import { getSortedReviews } from "../../reducer/reviews/selector";
-import {Operation as reviewsOperation, ActionCreator} from "../../reducer/reviews/reviews";
-import { ContextRoom } from "../../context";
+import { getSortedReviews } from "../reducer/reviews/selector";
+import {Operation as reviewsOperation, ActionCreator} from "../reducer/reviews/reviews";
+import { ContextRoom } from "../context";
 
 const getMurkupReviews = (isLoaded, reviews) => {
   if (isLoaded) {

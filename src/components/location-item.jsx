@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { ActionCreator } from "../../reducer/app-state/app-state";
+import { ActionCreator } from "../reducer/app-state/app-state";
 
 const LocationItem = ({city, isActive}) => {
   const dispatch = useDispatch();

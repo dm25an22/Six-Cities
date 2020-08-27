@@ -1,5 +1,5 @@
 import React from "react";
-import RoomInsideItem from "../room-inside-item/room-inside-item";
+import RoomInsideItem from "./room-inside-item";
 
 const RoomInsideList = ({goods}) => {
   return (

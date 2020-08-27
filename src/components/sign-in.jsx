@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Header from "../header/header";
+import Header from "./header";
 import { useDispatch, useSelector } from "react-redux";
-import { Operation } from "../../reducer/user/user";
+import { Operation } from "../reducer/user/user";
 import { useHistory, Redirect } from "react-router-dom";
-import { getAuthStatus } from "../../reducer/user/selector";
-import { AppRoute } from "../../enums";
+import { getAuthStatus } from "../reducer/user/selector";
+import { AppRoute } from "../enums";
 
 const SignIn = () => {
   const dispatch = useDispatch();
