@@ -8,32 +8,23 @@ import PrivateRoute from "./components/private-route";
 import Favorites from "./components/favorites";
 import NotFoundPage from "./components/not-found-page";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
 import { Operation as OffersOperation } from "./reducer/offers/offers";
 import WarringWrapper from "./components/warring-wrapper";
-
+import { useLoadStatus } from "./hooks";
 
 const App = () => {
   const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(null);
-
-  const onSuccess = () => {
-    setIsLoaded(true);
-  };
-
-  const onError = () => {
-    setIsLoaded(false);
-  };
+  const loadStatus = useLoadStatus();
 
   useEffect(() => {
-    dispatch(OffersOperation.loadHotels(onSuccess, onError));
-  }, [dispatch]);
+    dispatch(OffersOperation.loadHotels(loadStatus.onSuccess, loadStatus.onError));
+  }, []);
 
-  if (isLoaded === null) {
+  if (loadStatus.isLoad === null) {
     return null;
   }
 
-  if (!isLoaded) {
+  if (!loadStatus.isLoad) {
     return (
       <WarringWrapper>
         <h1>Server not available</h1>

@@ -10,12 +10,8 @@ import { getHotelById } from "../utils";
 import { useSelector } from "react-redux";
 import { getHotels } from "../reducer/offers/selectors";
 import { ContextRoom } from "../context";
-import withLoadStatus from "../hocs/with-load-status/with-load-status";
 import RoomAddReview from "./room-add-review";
 import { getAuthStatus } from "../reducer/user/selector";
-
-const RoomReviewWrapped = withLoadStatus(RoomReview);
-const RoomNearHotelsWrapped = withLoadStatus(RoomNearHotels);
 
 const Room = () => {
   window.scrollTo(0, 0);
@@ -35,14 +31,14 @@ const Room = () => {
               <div className="property__wrapper">
                 <RoomInfo />
                 <section className="property__reviews reviews">
-                  <RoomReviewWrapped />
+                  <RoomReview />
                   {authStatus && <RoomAddReview />}
                 </section>
               </div>
             </div>
           </section>
           <div className="container">
-            <RoomNearHotelsWrapped id={match.params.id} />
+            <RoomNearHotels id={match.params.id} />
           </div>
         </main>
       </div>

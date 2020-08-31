@@ -5,57 +5,76 @@ import { Operation, ActionCreator } from "../reducer/offers/offers";
 import { ContextRoom } from "../context";
 import PlaceCard from "./place-card";
 import CityMap from "./city-map";
+import { useLoadStatus } from "../hooks";
 
 const getMurkup = (isLoad, nearbyHotels, activeMarker, setActiveMarker, id) => {
   if (isLoad) {
     return (
-    <React.Fragment>
-      <section className="property__map map"> 
-        <CityMap key={id} hotels={nearbyHotels} activeMarker={activeMarker} />
-      </section>
-      <section className="near-places places">
-        <h2 className="near-places__title">
-          Other places in the neighbourhood
-        </h2>
-        <div className="near-places__list places__list">
-          {nearbyHotels.map((it) => <PlaceCard key={it.id} hotel={it} setActiveMarker={setActiveMarker} />)}
-        </div>
+      <React.Fragment>
+        <section className="property__map map">
+          <CityMap key={id} hotels={nearbyHotels} activeMarker={activeMarker} />
         </section>
-    </React.Fragment>
-    )
+        <section className="near-places places">
+          <h2 className="near-places__title">
+            Other places in the neighbourhood
+          </h2>
+          <div className="near-places__list places__list">
+            {nearbyHotels.map((it) => (
+              <PlaceCard
+                key={it.id}
+                hotel={it}
+                setActiveMarker={setActiveMarker}
+              />
+            ))}
+          </div>
+        </section>
+      </React.Fragment>
+    );
   } else {
     return (
-    <div style={{ padding: `50px 20px` }}>
-      <h2 style={{ textAlign: `center` }}>Failed to load nearby hotels</h2>
-    </div>
-    )
+      <div style={{ padding: `50px 20px` }}>
+        <h2 style={{ textAlign: `center` }}>Failed to load nearby hotels</h2>
+      </div>
+    );
   }
-}
+};
 
-const RoomNearHotelsList = ({ isLoad, onSuccess, onError, id }) => {
+const RoomNearHotelsList = ({ id }) => {
   const { hotel } = useContext(ContextRoom);
+  const loadStatus = useLoadStatus();
   const [activeMarker, setActiveMarker] = useState(null);
   const nearbyHotels = useSelector(getNearbyHotelsMax);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(Operation.loadNearbyHotels(hotel.id, onSuccess, onError));
+    dispatch(
+      Operation.loadNearbyHotels(
+        hotel.id,
+        loadStatus.onSuccess,
+        loadStatus.onError
+      )
+    );
 
     return () => {
       dispatch(ActionCreator.claenupNearbyHotels());
     };
-  }, [dispatch, hotel.id, onError, onSuccess]);
+  }, []);
 
   return (
     <React.Fragment>
-      {isLoad === null
-        ?
-      <div style={{ padding: `50px 20px` }}>
-        <h2 style={{ textAlign: `center` }}>LOADING...</h2>
-      </div>
-        :
-      getMurkup(isLoad, nearbyHotels, activeMarker, setActiveMarker, id)
-      }
+      {loadStatus.isLoad === null ? (
+        <div style={{ padding: `50px 20px` }}>
+          <h2 style={{ textAlign: `center` }}>LOADING...</h2>
+        </div>
+      ) : (
+        getMurkup(
+          loadStatus.isLoad,
+          nearbyHotels,
+          activeMarker,
+          setActiveMarker,
+          id
+        )
+      )}
     </React.Fragment>
   );
 };

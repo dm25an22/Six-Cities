@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getSortedReviews } from "../reducer/reviews/selector";
 import {Operation as reviewsOperation, ActionCreator} from "../reducer/reviews/reviews";
 import { ContextRoom } from "../context";
+import { useLoadStatus } from "../hooks";
 
 const getMurkupReviews = (isLoaded, reviews) => {
   if (isLoaded) {
@@ -24,28 +25,29 @@ const getMurkupReviews = (isLoaded, reviews) => {
   }
 };
 
-const RoomReview = ({isLoad, onSuccess, onError}) => {
+const RoomReview = () => {
   const {hotel} = useContext(ContextRoom);
+  const loadStatus = useLoadStatus();
   const reviews = useSelector(getSortedReviews);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(reviewsOperation.loadReviews(hotel.id, onSuccess, onError));
+    dispatch(reviewsOperation.loadReviews(hotel.id, loadStatus.onSuccess, loadStatus.onError));
 
     return () => {
       dispatch(ActionCreator.cleanupReviews())
     }
-  }, [dispatch, hotel.id, onError, onSuccess]);
+  }, []);
 
   return (   
     <React.Fragment>   
-      {isLoad === null 
+      {loadStatus.isLoad === null 
         ? 
       <div style={{padding: `50px 20px`}}>
         <h2 style={{textAlign: `center`}}>LOADING...</h2>
       </div> 
         :
-        getMurkupReviews(isLoad, reviews)
+        getMurkupReviews(loadStatus.isLoad, reviews)
       } 
     </React.Fragment>      
   );
