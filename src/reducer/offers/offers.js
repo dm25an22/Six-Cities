@@ -38,13 +38,14 @@ const ActionCreator = {
 };
 
 const Operation = {
-  loadHotels: () => {
+  loadHotels: (onSuccess, onError) => {
     return async (dispatch) => {
       try {
         const hotels = await api.getHotels();
         dispatch(ActionCreator.loadHotels(hotels))
+        onSuccess();
       } catch {
-        console.log(`nok`)
+        onError();
       }
     }
   },

@@ -6,7 +6,6 @@ import ReduxThunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import App from "./app";
 import { rootReducer } from "./reducer/rootReducer";
-import { Operation as OffersOperation } from "./reducer/offers/offers";
 import { Operation as UserOpertaion } from "./reducer/user/user";
 
 const store = createStore(
@@ -17,7 +16,6 @@ const store = createStore(
 new Promise((resolve) => {
   resolve(store.dispatch(UserOpertaion.checkAuthStatus()));
 }).finally(() => {
-  Promise.all([store.dispatch(OffersOperation.loadHotels())]).then(() => {
     ReacrDom.render(
       <Provider store={store}>
         <App />
@@ -25,4 +23,3 @@ new Promise((resolve) => {
       document.querySelector(`#root`)
     );
   });
-});
