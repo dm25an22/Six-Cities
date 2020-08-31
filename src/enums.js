@@ -1,8 +1,15 @@
+// const TypeSort = {
+//   POPULAR: `popular`,
+//   TO_HIGH: `to-high`,
+//   TO_LOW: `to-low`,
+//   TOP_RATED: `top-rated`
+// };
+
 const TypeSort = {
-  POPULAR: `popular`,
-  TO_HIGH: `to-high`,
-  TO_LOW: `to-low`,
-  TOP_RATED: `top-rated`
+  POPULAR: `Popular`,
+  TO_HIGH: `Price: low to high`,
+  TO_LOW: `Price: high to low`,
+  TOP_RATED: `Top rated first`,
 };
 
 const AppRoute = {
