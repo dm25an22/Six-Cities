@@ -6,6 +6,7 @@ import {AppRoute} from "./enums";
 import SignIn from "./components/sign-in";
 import PrivateRoute from "./components/private-route";
 import Favorites from "./components/favorites";
+import NotFoundPage from "./components/not-found-page";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             }}
           />
         <Route exact path={`${AppRoute.ROOM}/:id`} component={Room} />
+        <Route component={NotFoundPage}/>
       </Switch>
     </BrowserRouter>
   );

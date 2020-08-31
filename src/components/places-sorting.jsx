@@ -2,13 +2,6 @@ import React, { useEffect } from "react";
 import { TypeSort } from "../enums";
 import { useState } from "react";
 
-// const SortTitle = {
-//   POPULAR: `Popular`,
-//   TO_HIGH: `Price: low to high`,
-//   TO_LOW: `Price: high to low`,
-//   TOP_RATED: `Top rated first`,
-// };
-
 const PlacesSorting = ({ activeSortType, setActiveSortType }) => {
   const [showOptionsList, setShowOptionsList] = useState(false);
 
