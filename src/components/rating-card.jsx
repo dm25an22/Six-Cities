@@ -1,9 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { getRatingByPercent } from "../utils";
 
-const RatingCard = ({rating}) => {
+const RatingCard = ({ rating }) => {
   const ratingInPercent = getRatingByPercent(rating);
-
 
   return (
     <div className="place-card__rating rating">
@@ -13,6 +13,10 @@ const RatingCard = ({rating}) => {
       </div>
     </div>
   );
+};
+
+RatingCard.propTypes = {
+  rating: PropTypes.number.isRequired,
 };
 
 export default RatingCard;

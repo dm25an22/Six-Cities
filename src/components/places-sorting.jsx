@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import { TypeSort } from "../enums";
 import { useState } from "react";
 
@@ -18,7 +19,7 @@ const PlacesSorting = ({ activeSortType, setActiveSortType }) => {
       setActiveSortType(TypeSort.POPULAR);
       window.removeEventListener(`click`, closeOptionsList);
     };
-  }, [setActiveSortType]);
+  }, []);
 
   return (
     <div className="places__sorting">
@@ -58,6 +59,11 @@ const PlacesSorting = ({ activeSortType, setActiveSortType }) => {
       )}
     </div>
   );
+};
+
+PlacesSorting.propTypes = {
+  activeSortType: PropTypes.string.isRequired,
+  setActiveSortType: PropTypes.func.isRequired
 };
 
 export default PlacesSorting;

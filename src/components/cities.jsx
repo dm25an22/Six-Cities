@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import PlacesSorting from "./places-sorting";
 import PlacesList from "./places-list";
 import { TypeSort } from "../enums";
 import { getSortedHotels } from "../utils";
 import CityMap from "./city-map";
+import { hotelType } from "../types";
 
 const Cities = ({ hotels, activeLocation }) => {
   const [activeSortType, setSorttype] = useState(TypeSort.POPULAR);
@@ -36,6 +38,11 @@ const Cities = ({ hotels, activeLocation }) => {
       </div>
     </div>
   );
+};
+
+Cities.propTypes = {
+  hotels: PropTypes.arrayOf(PropTypes.shape(hotelType)).isRequired,
+  activeLocation: PropTypes.string.isRequired,
 };
 
 export default Cities;

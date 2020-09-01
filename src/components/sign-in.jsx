@@ -8,7 +8,6 @@ import { AppRoute } from "../enums";
 
 const SignIn = () => {
   const dispatch = useDispatch();
-
   const authStatus = useSelector(getAuthStatus);
   const history = useHistory();
   const [email, setEmail] = useState(``);

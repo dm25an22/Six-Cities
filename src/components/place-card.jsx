@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { AppRoute } from "../enums";
 import { useSelector } from "react-redux";
@@ -8,6 +9,7 @@ import { checkInFavorites } from "../utils";
 import RatingCard from "./rating-card";
 import PriceCard from "./price-card";
 import BookMarkCard from "./book-mark-card";
+import { hotelType } from "../types";
 
 const PlaceCard = ({ hotel, setActiveMarker }) => {
   const authStatus = useSelector(getAuthStatus);
@@ -58,6 +60,11 @@ const PlaceCard = ({ hotel, setActiveMarker }) => {
       </div>
     </article>
   );
+};
+
+PlaceCard.propTypes ={
+  hotel: PropTypes.shape(hotelType).isRequired,
+  setActiveMarker: PropTypes.func.isRequired
 };
 
 export default PlaceCard;

@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
+import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
 import { getNearbyHotelsMax } from "../reducer/offers/selectors";
 import { Operation, ActionCreator } from "../reducer/offers/offers";
@@ -6,6 +7,7 @@ import { ContextRoom } from "../context";
 import PlaceCard from "./place-card";
 import CityMap from "./city-map";
 import { useLoadStatus } from "../hooks";
+import ErrorLoading from "./error-loading ";
 
 const getMurkup = (isLoad, nearbyHotels, activeMarker, setActiveMarker, id) => {
   if (isLoad) {
@@ -32,9 +34,7 @@ const getMurkup = (isLoad, nearbyHotels, activeMarker, setActiveMarker, id) => {
     );
   } else {
     return (
-      <div style={{ padding: `50px 20px` }}>
-        <h2 style={{ textAlign: `center` }}>Failed to load nearby hotels</h2>
-      </div>
+      <ErrorLoading messsage={`Failed to load nearby hotels`}/>
     );
   }
 };
@@ -77,6 +77,10 @@ const RoomNearHotelsList = ({ id }) => {
       )}
     </React.Fragment>
   );
+};
+
+RoomNearHotelsList.propTypes = {
+  id: PropTypes.string.isRequired,
 };
 
 export default RoomNearHotelsList;

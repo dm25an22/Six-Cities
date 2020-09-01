@@ -14,10 +14,6 @@ const Main = () => {
   const hotels = useSelector(getHotels);
   let hotelsByLocation = getHotelsByLocation(hotels, activeLocation);
 
-  if (activeLocation === `Cologne`) {
-    hotelsByLocation = [];
-  }
-
   return (
     <div className="page page--gray page--main">
       <Header />

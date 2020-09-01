@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import LocationItem from "./location-item";
 
 const LacationList = ({activeLocation, locations}) => { 
@@ -19,6 +20,11 @@ const LacationList = ({activeLocation, locations}) => {
       </section>
     </div>
   );
-}
+};
+
+LacationList.propTypes = {
+  activeLocation: PropTypes.string.isRequired,
+  locations: PropTypes.arrayOf(PropTypes.string).isRequired
+};
 
 export default LacationList;

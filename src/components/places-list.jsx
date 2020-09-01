@@ -1,5 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 import PlaceCard from "./place-card";
+import { hotelType } from "../types";
 
 const PlacesList = ({hotels, setActiveMarker}) => {
   return (
@@ -7,6 +9,11 @@ const PlacesList = ({hotels, setActiveMarker}) => {
       {hotels.map((hotel) => <PlaceCard key={hotel.id} hotel={hotel} setActiveMarker={setActiveMarker} /> )}
     </div>
   );
-}
+};
+
+PlacesList.propTypes = {
+  hotels: PropTypes.arrayOf(PropTypes.shape(hotelType)).isRequired,
+  setActiveMarker: PropTypes.func.isRequired
+};
 
 export default PlacesList;

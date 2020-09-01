@@ -5,6 +5,7 @@ import { getSortedReviews } from "../reducer/reviews/selector";
 import {Operation as reviewsOperation, ActionCreator} from "../reducer/reviews/reviews";
 import { ContextRoom } from "../context";
 import { useLoadStatus } from "../hooks";
+import ErrorLoading from "./error-loading ";
 
 const getMurkupReviews = (isLoaded, reviews) => {
   if (isLoaded) {
@@ -18,9 +19,7 @@ const getMurkupReviews = (isLoaded, reviews) => {
     );
   } else {
     return (
-      <div style={{padding: `50px 20px`}}>
-        <h2 style={{textAlign: `center`}}>Failed to load reviews</h2>
-      </div>
+      <ErrorLoading messsage={`Failed to load reviews`}/>
     );
   }
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const NoPlacesAvailable = ({activeLocation}) => {
   return (
@@ -14,6 +15,10 @@ const NoPlacesAvailable = ({activeLocation}) => {
         </div>
       </div>
   );
-}
+};
+
+NoPlacesAvailable.propTypes = {
+  activeLocation: PropTypes.string.isRequired
+};
 
 export default NoPlacesAvailable;

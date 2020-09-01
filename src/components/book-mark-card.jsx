@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { Operation } from "../reducer/favorites/favorites";
 
@@ -21,6 +22,11 @@ const BookMarkCard = ({id, status}) => {
       <span className="visually-hidden">In bookmarks</span>
     </button>
   );
+};
+
+BookMarkCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  status: PropTypes.number.isRequired
 };
 
 export default BookMarkCard;

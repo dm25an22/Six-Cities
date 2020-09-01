@@ -28,7 +28,7 @@ const RoomInfo = () => {
     goods,
     host,
     description,
-    id
+    id,
   } = hotel;
 
   return (
@@ -43,9 +43,15 @@ const RoomInfo = () => {
         <h1 className="property__name">{title}</h1>
 
         {authStatus && (
-          <button onClick={() => {
-            dispatch(Operation.toggleIsFavorite(id, status))
-          }} className={`property__bookmark-button ${isFavorite && `property__bookmark-button--active`} button`} type="button">
+          <button
+            onClick={() => {
+              dispatch(Operation.toggleIsFavorite(id, status));
+            }}
+            className={`property__bookmark-button ${
+              isFavorite && `property__bookmark-button--active`
+            } button`}
+            type="button"
+          >
             <svg className="place-card__bookmark-icon" width={31} height={33}>
               <use xlinkHref="#icon-bookmark" />
             </svg>

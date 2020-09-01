@@ -1,5 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { getRatingByPercent, getformatDateForReview } from "../utils";
+import { reviewType } from "../types";
 
 const RoomReviewItem = ({ review }) => {
   const {
@@ -39,6 +41,10 @@ const RoomReviewItem = ({ review }) => {
       </div>
     </li>
   );
+};
+
+RoomReviewItem.propTypes = {
+  review: PropTypes.shape(reviewType).isRequired
 };
 
 export default RoomReviewItem;

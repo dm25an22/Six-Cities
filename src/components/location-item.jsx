@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { ActionCreator } from "../reducer/app-state/app-state";
 
@@ -23,6 +24,11 @@ const LocationItem = ({city, isActive}) => {
       </a>
     </li>
   );
-}
+};
+
+LocationItem.propTypes = {
+  city: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired
+};
 
 export default LocationItem;

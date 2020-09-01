@@ -1,6 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 import FavoritesLocationItem from "./favorites-location-item";
 import { getUniqueLocations, getHotelsByLocation } from "../utils";
+import { hotelType } from "../types";
 
 const FavoritesList = ({ favoriteHotels }) => {
   const locations = getUniqueLocations(favoriteHotels);
@@ -23,6 +25,10 @@ const FavoritesList = ({ favoriteHotels }) => {
       </div>
     </main>
   );
+};
+
+FavoritesList.propTypes = {
+  favoriteHotels: PropTypes.arrayOf(PropTypes.shape(hotelType)).isRequired
 };
 
 export default FavoritesList;

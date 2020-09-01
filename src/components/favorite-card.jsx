@@ -1,9 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { AppRoute } from "../enums";
 import RatingCard from "./rating-card";
 import PriceCard from "./price-card";
 import BookMarkCard from "./book-mark-card";
+import { hotelType } from "../types";
 
 const FavoriteCard = ({ hotel }) => {
   const { price, rating, title, type, previewImage, id } = hotel;
@@ -35,6 +37,10 @@ const FavoriteCard = ({ hotel }) => {
       </div>
     </article>
   );
+};
+
+FavoriteCard.propTypes = {
+  hotel: PropTypes.shape(hotelType).isRequired
 };
 
 export default FavoriteCard;

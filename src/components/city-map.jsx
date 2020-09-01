@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
+import PropTypes from "prop-types";
 import leaflet from "leaflet";
 import { useHistory } from "react-router-dom";
 import { AppRoute } from "../enums";
 import { getRatingByPercent } from "../utils";
+import { hotelType } from "../types";
 
 const CityMap = ({ hotels, activeMarker }) => {
   const [card, setCard] = useState(null);
@@ -90,6 +92,13 @@ const CityMap = ({ hotels, activeMarker }) => {
       style={{ width: `100%`, height: `100%` }}
     ></div>
   );
+};
+
+CityMap.propTypes = {
+  hotels: PropTypes.arrayOf(PropTypes.shape(hotelType)).isRequired,
+  activeMarker: PropTypes.oneOfType([
+    PropTypes.number,
+  ])
 };
 
 export default CityMap;
