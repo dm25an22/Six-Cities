@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const WarringWrapper = ({children}) => {
+const WarringWrapper = ({ children }) => {
   return (
     <div
       style={{
@@ -15,6 +16,10 @@ const WarringWrapper = ({children}) => {
       {children}
     </div>
   );
+};
+
+WarringWrapper.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default WarringWrapper;
